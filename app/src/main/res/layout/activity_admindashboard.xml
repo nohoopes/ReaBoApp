@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/ad_dashboard_bg2"
+    android:layout_height="match_parent"
+    tools:context=".Activity.AdminDashboardActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/toolBarRl"
+        android:background="#42D6C8"
+        android:layout_height="?actionBarSize">
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="Dashboard Admin"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/subtitleTv"
+            android:layout_below="@id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:text="Dashboard Admin"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+        <ImageButton
+            android:id="@+id/exitBtn"
+            android:src="@drawable/ic_exit_white"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <!--Search-->
+    <EditText
+        android:id="@+id/searchEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolBarRl"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:drawablePadding="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/white"
+        android:drawableStart="@drawable/ic_search_gray"
+        android:hint="Search..."
+        android:padding="10dp" />
+
+    <!--Category-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categoriesRv"
+        android:layout_margin="5dp"
+        tools:listitem="@layout/ad_row_category"
+        android:layout_below="@id/searchEt"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_above="@id/bottomLl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:id="@+id/bottomLl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="10dp">
+
+        <!--Add category-->
+        <Button
+            android:id="@+id/addCategoryBtn"
+            android:layout_width="wrap_content"
+            android:text="+ Add Category"
+            android:layout_weight="1"
+            android:minHeight="50dp"
+            android:backgroundTint="#331960"
+            android:layout_marginEnd="10dp"
+            android:textAllCaps="false"
+            android:layout_height="wrap_content"/>
+
+        <!--Add PDF-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addPdf"
+            android:src="@drawable/ic_pdf_add_white"
+            app:tint="@color/white"
+            android:backgroundTint="#301361"
+            app:fabCustomSize="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

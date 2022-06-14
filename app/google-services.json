@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "601905520068",
+    "project_id": "book-app-d46f2",
+    "storage_bucket": "book-app-d46f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:601905520068:android:9ed9f0e7aa8acdbb171891",
+        "android_client_info": {
+          "package_name": "id19110100.hcmute.edu.reaboadmin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "601905520068-r86ino92c5eb9m8j5sjqmq0b17s00i4a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id19110100.hcmute.edu.reaboadmin",
+            "certificate_hash": "0e715a71033eac4a0885630690825137e259ddde"
+          }
+        },
+        {
+          "client_id": "601905520068-aa9dca7pff6omel662qjojgsi5rmnnae.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC4jycKdFxYhBkdo5d-4WnhISHG6u34zoQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "601905520068-aa9dca7pff6omel662qjojgsi5rmnnae.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

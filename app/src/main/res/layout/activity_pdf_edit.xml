@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/load_pdf_bg"
+    tools:context=".Activity.PdfEditActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="#1C8A98"
+        android:layout_height="250dp">
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:src="@drawable/ic_back_white"
+            android:background="@android:color/transparent"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/iconIv"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/reabo_logo2"
+            android:layout_width="110dp"
+            android:layout_height="110dp"/>
+        <TextView
+            android:layout_below="@+id/iconIv"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-condensed"
+            android:text="Edit book"
+            android:id="@+id/titleTv"
+            android:textColor="@color/white"
+            android:textSize="25sp"
+            android:layout_height="wrap_content"
+            tools:ignore="UnknownId" />
+        <TextView
+            android:id="@+id/subtitleTv"
+            android:layout_below="@id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:text="Book Info"
+            android:textColor="@color/white"
+            android:textSize="13sp" />
+    </RelativeLayout>
+    <!--Scroll-->
+    <ScrollView
+        android:layout_marginTop="225dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--Title-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/titleTil"
+                app:hintEnabled="false"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/titleEt"
+                    android:backgroundTint="#E2F6F4"
+                    android:drawableStart="@drawable/ic_title_gray"
+                    android:drawablePadding="10dp"
+                    android:hint="Book Title..."
+                    android:textColor="@color/black"
+                    android:inputType="textPersonName|textCapWords"
+                    android:padding="10dp"
+                    android:textSize="16sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--Description-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/descriptionTil"
+                app:hintEnabled="false"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_below="@+id/titleTil"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/descriptionEt"
+                    android:backgroundTint="#E2F6F4"
+                    android:drawableStart="@drawable/ic_description_gray"
+                    android:drawablePadding="10dp"
+                    android:textSize="16sp"
+                    android:hint="Book Description..."
+                    android:textColor="@color/black"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--Free/Premium license-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/licenseTil"
+                app:hintEnabled="false"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_below="@+id/descriptionTil"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText
+                    android:id="@+id/licenseEt"
+                    android:backgroundTint="#E2F6F4"
+                    android:drawableStart="@drawable/ic_star_gray"
+                    android:drawablePadding="10dp"
+                    android:textSize="16sp"
+                    android:hint="free/premium"
+                    android:textColor="@color/black"
+                    android:inputType="textPersonName|textCapWords"
+                    android:padding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--Pick category-->
+            <TextView
+                android:id="@+id/categoryTv"
+                android:layout_below="@id/licenseTil"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="5dp"
+                android:background="#E2F6F4"
+                android:gravity="center_vertical"
+                android:drawablePadding="10dp"
+                android:hint="Book Category"
+                android:padding="10dp"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:drawableStart="@drawable/ic_category_gray"
+                android:drawableEnd="@drawable/ic_arrow_down_gray"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <!--edit btn-->
+            <Button
+                android:id="@+id/editBtn"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginTop="5dp"
+                android:backgroundTint="#063543"
+                android:text="Update"
+                android:textColor="@color/white"
+                android:layout_below="@id/categoryTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+
+
+    </ScrollView>
+
+</RelativeLayout>

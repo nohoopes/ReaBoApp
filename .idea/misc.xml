@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/drawable/ic_category_gray.xml" value="0.1" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/drawable/ic_delete_black.xml" value="0.1" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/drawable/ic_pdf_add_white.xml" value="0.1" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/layout/activity_admindashboard.xml" value="0.12142857142857143" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/layout/activity_category_add.xml" value="0.1" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/layout/activity_login.xml" value="0.14764492753623187" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/layout/activity_pdf_add.xml" value="0.12" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/layout/activity_pdf_detail.xml" value="0.25263157894736843" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/layout/activity_pdf_edit.xml" value="0.12318840579710146" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/layout/activity_pdf_list_admin.xml" value="0.1" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/layout/activity_pdf_view.xml" value="0.16" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/layout/activity_register.xml" value="0.16" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/layout/activity_splash.xml" value="0.17572463768115942" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/layout/activity_user_home.xml" value="0.1" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/layout/ad_row_category.xml" value="0.17567567567567569" />
+        <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/layout/row_pdf_admin.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

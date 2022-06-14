@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/load_pdf_bg"
+    android:layout_height="match_parent"
+    tools:context=".Activity.PdfListAdminActivity">
+
+    <!--Tool bar-->
+    <RelativeLayout
+        android:id="@+id/toolBarRl"
+        android:background="@drawable/toolbar_bg1"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize">
+
+        <!--back btn-->
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:src="@drawable/ic_back_white"
+            android:background="@android:color/transparent"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <!--Title-->
+        <TextView
+            android:id="@+id/titleTv"
+            android:text="Books"
+            android:layout_marginTop="8dp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <!--category-->
+        <TextView
+            android:id="@+id/subtitleTv"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:layout_below="@id/titleTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+    <!--Search-->
+    <EditText
+        android:id="@+id/searchEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolBarRl"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:drawablePadding="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/white"
+        android:drawableStart="@drawable/ic_search_gray"
+        android:hint="Search..."
+        android:padding="10dp" />
+
+    <!--Show list pdf-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bookRv"
+        android:layout_margin="10dp"
+        android:scrollbars="vertical"
+        android:layout_below="@id/searchEt"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/row_pdf_admin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+</RelativeLayout>
