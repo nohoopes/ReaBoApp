@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 import id19110100.hcmute.edu.reaboadmin.Class.FilterCategory;
 import id19110100.hcmute.edu.reaboadmin.Model.ModelCategoryAd;
-import id19110100.hcmute.edu.reaboadmin.Activity.PdfListAdminActivity;
+import id19110100.hcmute.edu.reaboadmin.PdfListAdminActivity;
 import id19110100.hcmute.edu.reaboadmin.databinding.AdRowCategoryBinding;
 
 public class AdapterCategoryAd extends RecyclerView.Adapter<AdapterCategoryAd.HolderCategory> implements Filterable {
@@ -140,7 +140,7 @@ public class AdapterCategoryAd extends RecyclerView.Adapter<AdapterCategoryAd.Ho
 
     class HolderCategory extends RecyclerView.ViewHolder{
 
-        //
+        //variables
         TextView categoryTv;
         ImageButton deleteBtn;
 

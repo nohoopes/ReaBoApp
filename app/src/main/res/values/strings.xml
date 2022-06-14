@@ -1,4 +1,35 @@
 <resources>
-    <string name="app_name">ReaBo Admin</string>
+    <string name="app_name">ReaBo</string>
     <string name="new_user_signup">New User? <b>Sign up!</b></string>
+    <string name="nav_home">Home</string>
+    <string name="nav_history">History</string>
+    <string name="nav_coupons">Coupons</string>
+    <string name="nav_account">Account</string>
+    <string name="nav_my_profile">My Profile</string>
+    <string name="nav_logout">Log Out</string>
+    <string name="app_bar_shopping_cart">Shopping Cart</string>
+    <string name="app_bar_search">Search</string>
+
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
+
+    <string name="search_box_hint">Search your restaurant</string>
+
+    <string name="home_product_bottom_title">DETAILS</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_price">Direct Price</string>
+    <string name="add_to_cart">Add To Cart</string>
+    <string name="confirm_order">Confirm Order</string>
+    <string name="map_api_key">AIzaSyDsmhIWOYH02x2u2S2XGqT0YiIv6RkTG8A</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="user_address">Address</string>
+    <string name="user_birthdate">Birthdate</string>
+    <string name="user_phone">Phone</string>
+    <string name="user_real_name">Full Name</string>
+    <string name="update">Update</string>
+    <string name="be_patient">Your order is being shipped!</string>
+    <string name="ok">OK!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

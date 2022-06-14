@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/book_detail_bg2"
-    tools:context=".Activity.PdfDetailActivity">
+    tools:context=".PdfDetailActivity">
 
     <!--Tool bar-->
     <RelativeLayout

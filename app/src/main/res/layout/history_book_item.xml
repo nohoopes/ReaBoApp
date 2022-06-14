@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/history_book_layout"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/history_book_2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="90dp">
+        <ImageView
+            android:id="@+id/history_book_img"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="7dp"
+            android:layout_width="88dp"
+            android:scaleType="fitXY"
+            android:layout_height="75dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/history_book_name"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name of the book"
+                android:textColor="@color/white"
+                android:fontFamily="@font/intrepid"
+                android:textSize="15dp"/>
+            <TextView
+                android:id="@+id/history_book_time"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time when reading"
+                android:textColor="@color/white"
+                android:fontFamily="@font/intrepid"
+                android:textSize="15dp"/>
+            <TextView
+                android:id="@+id/btn_history_read_cont"
+                android:padding="5dp"
+                android:background="@color/white"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/intrepid"
+                android:text="Continute"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

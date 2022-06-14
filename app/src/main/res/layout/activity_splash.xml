@@ -6,6 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/reabo_splash_bg"
-    tools:context=".Activity.SplashActivity">
+    tools:context=".SplashActivity">
 
 </androidx.appcompat.widget.LinearLayoutCompat>

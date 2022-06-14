@@ -13,37 +13,40 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
         <activity
-            android:name=".Activity.PdfViewActivity"
+            android:name=".NavigationBar"
             android:exported="false" />
         <activity
-            android:name=".Activity.PdfDetailActivity"
+            android:name=".PdfViewActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.PdfEditActivity"
+            android:name=".PdfDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.PdfListAdminActivity"
+            android:name=".PdfEditActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.PdfAddActivity"
+            android:name=".PdfListAdminActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.UserHomeActivity"
+            android:name=".PdfAddActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.RegisterActivity"
+            android:name=".UserHomeActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.LoginActivity"
+            android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.CategoryAddActivity"
+            android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".Activity.AdminDashboardActivity"
+            android:name=".CategoryAddActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AdminDashboardActivity"
             android:exported="true" />
         <activity
-            android:name=".Activity.SplashActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
