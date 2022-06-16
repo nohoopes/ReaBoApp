@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,36 +42,15 @@ public class LibraryFragment extends Fragment {
     Button btn_confirm;
     ArrayList<RecyclerView> recyclerViews;
 
+    //firebase auth
+    private FirebaseAuth firebaseAuth;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.library,container,false);
         InflateRecyclerView(view);
-        /*libraries = new ArrayList<>();
-        ModelPdf modelA = new ModelPdf();
-        modelA.setId("1");
-        modelA.setUrl("https://firebasestorage.googleapis.com/v0/b/reabo-456e1.appspot.com/o/Books%2F1655351869911?alt=media&token=adfa0d31-2b88-41c0-a257-a0091e862f25");
-        modelA.setTitle("AAAAA");
-
-        ModelPdf modelB = new ModelPdf();
-        modelB.setUrl("https://firebasestorage.googleapis.com/v0/b/reabo-456e1.appspot.com/o/Books%2F1655351869911?alt=media&token=adfa0d31-2b88-41c0-a257-a0091e862f25");
-        modelB.setTitle("BAAAA");
-        modelB.setId("2");
-
-        ModelPdf modelC = new ModelPdf();
-        modelC.setUrl("https://firebasestorage.googleapis.com/v0/b/reabo-456e1.appspot.com/o/Books%2F1655351869911?alt=media&token=adfa0d31-2b88-41c0-a257-a0091e862f25");
-        modelC.setTitle("CAAAA");
-        modelC.setId("3");
-
-        Library library1 = new Library("1", modelA, "44J4xfZ7RfSoR0U32L3qZJNBzFH2");
-        Library library3 = new Library("3", modelC, "44J4xfZ7RfSoR0U32L3qZJNBzFH2");
-        Library library2 = new Library("2", modelB, "44J4xfZ7RfSoR0U32L3qZJNBzFH2");
-
-        libraries.add(library1);
-        libraries.add(library2);
-        libraries.add(library3);
-
-        Classify(libraries);*/
+        firebaseAuth = FirebaseAuth.getInstance();
 
         loadLibrary();
 
@@ -78,11 +58,13 @@ public class LibraryFragment extends Fragment {
     }
 
     private void loadLibrary() {
+
+        String uid = firebaseAuth.getUid();
         //init arraylist
         libraries = new ArrayList<>();
         //get all libraries from firebase
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Library");
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.orderByChild("uid").equalTo(uid).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 //clear arraylist before adding data into it

@@ -2,16 +2,16 @@ package id19110100.hcmute.edu.reaboadmin.Model;
 
 public class History {
     String id;
-    ModelPdf pdf;
+    ModelPdf Books;
     String uid;
     Long timestamp;
 
     public History() {
     }
 
-    public History(String id, ModelPdf pdf, String uid, Long timestamp, String url) {
+    public History(String id, ModelPdf Books, String uid, Long timestamp) {
         this.id = id;
-        this.pdf = pdf;
+        this.Books = Books;
         this.uid = uid;
         this.timestamp = timestamp;
     }
@@ -24,12 +24,12 @@ public class History {
         this.id = id;
     }
 
-    public ModelPdf getPdf() {
-        return pdf;
+    public ModelPdf getBooks() {
+        return Books;
     }
 
-    public void setPdf(ModelPdf pdf) {
-        this.pdf = pdf;
+    public void setBooks(ModelPdf books) {
+        Books = books;
     }
 
     public String getUid() {

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <LinearLayout
         android:id="@+id/history_book_layout"
         android:layout_marginTop="20dp"
@@ -11,7 +11,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="90dp">
-        <ImageView
+        <com.github.barteksc.pdfviewer.PDFView
             android:id="@+id/history_book_img"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="7dp"
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/intrepid"
-                android:text="Continute"/>
+                android:text="Continue"/>
         </LinearLayout>
     </LinearLayout>
 

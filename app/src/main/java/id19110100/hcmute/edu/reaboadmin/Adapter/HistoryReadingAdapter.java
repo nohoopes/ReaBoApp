@@ -1,17 +1,21 @@
 package id19110100.hcmute.edu.reaboadmin.Adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import id19110100.hcmute.edu.reaboadmin.Class.MyApplication;
 import id19110100.hcmute.edu.reaboadmin.Model.History;
 import id19110100.hcmute.edu.reaboadmin.R;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.github.barteksc.pdfviewer.PDFView;
 
 import java.util.ArrayList;
 
@@ -19,9 +23,11 @@ import id19110100.hcmute.edu.reaboadmin.Model.Book;
 import id19110100.hcmute.edu.reaboadmin.Model.Product;
 
 public class HistoryReadingAdapter extends  RecyclerView.Adapter<HistoryReadingAdapter.HistoryOrderViewHolder>{
+    private Context context;
     private final ArrayList<History> histories;
 
-    public HistoryReadingAdapter(ArrayList<History> histories) {
+    public HistoryReadingAdapter(Context context, ArrayList<History> histories) {
+        this.context = context;
         this.histories = histories;
     }
 
@@ -39,7 +45,15 @@ public class HistoryReadingAdapter extends  RecyclerView.Adapter<HistoryReadingA
         {
             return;
         }
-        //holder.nameHistory.setText(history.);
+        holder.nameHistory.setText(history.getBooks().getTitle());
+        holder.timeHistory.setText(MyApplication.formatTimestamp(history.getTimestamp()));
+        holder.btnReadHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        MyApplication.loadFirstPage(history.getBooks().getUrl(), holder.imgHistory);
     }
 
     @Override
@@ -53,7 +67,7 @@ public class HistoryReadingAdapter extends  RecyclerView.Adapter<HistoryReadingA
 
     public class HistoryOrderViewHolder extends RecyclerView.ViewHolder{
         private final TextView nameHistory, timeHistory, btnReadHistory;
-        private final ImageView imgHistory;
+        private final PDFView imgHistory;
         public HistoryOrderViewHolder(@NonNull View itemView) {
             super(itemView);
             nameHistory=itemView.findViewById(R.id.history_book_name);
