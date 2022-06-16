@@ -41,20 +41,34 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="10dp">
+
         <EditText
-            android:id="@+id/my_profile_username"
+            android:id="@+id/my_profile_full_name_edit"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:padding="10dp"
-            android:hint="@string/username"
+            android:hint="Full name"
+            android:background="@drawable/search_box"
+            android:drawableStart="@drawable/ic_card"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:textColor="@color/pink_500"
+            android:textColorHint="#5A5757"
+            android:elevation="4dp"/>
+
+        <EditText
+            android:id="@+id/my_profile_email"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:hint="Email"
             android:background="@drawable/search_box"
             android:drawableStart="@drawable/ic_username"
             android:layout_margin="10dp"
             android:layout_gravity="center"
             android:textColor="@color/pink_500"
             android:textColorHint="#5A5757"
-            android:elevation="4dp"
-            android:focusable="false"/>
+            android:elevation="4dp"/>
         <EditText
             android:id="@+id/my_profile_password"
             android:layout_width="300dp"
@@ -69,45 +83,19 @@
             android:textColorHint="#5A5757"
             android:elevation="4dp"/>
         <EditText
-            android:id="@+id/my_profile_birthdate"
+            android:id="@+id/my_profile_confirm_password"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:padding="10dp"
-            android:hint="@string/user_birthdate"
+            android:hint="Confirm password"
             android:background="@drawable/search_box"
-            android:drawableStart="@drawable/ic_date"
+            android:drawableStart="@drawable/ic_password"
             android:layout_gravity="center"
             android:layout_margin="10dp"
             android:textColor="@color/pink_500"
             android:textColorHint="#5A5757"
             android:elevation="4dp"/>
-        <EditText
-            android:id="@+id/my_profile_address"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:hint="@string/user_address"
-            android:background="@drawable/search_box"
-            android:drawableStart="@drawable/ic_address"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:textColor="@color/pink_500"
-            android:textColorHint="#5A5757"
-            android:elevation="4dp"/>
-        <EditText
-            android:id="@+id/my_profile_phone"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:padding="10dp"
-            android:focusable="false"
-            android:hint="@string/user_phone"
-            android:background="@drawable/search_box"
-            android:drawableStart="@drawable/ic_phone"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
-            android:textColor="@color/pink_500"
-            android:textColorHint="#5A5757"
-            android:elevation="4dp"/>
+
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_update_profile"
