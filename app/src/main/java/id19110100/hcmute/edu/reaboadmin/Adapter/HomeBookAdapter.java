@@ -8,12 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import id19110100.hcmute.edu.reaboadmin.Class.MyApplication;
+import id19110100.hcmute.edu.reaboadmin.Model.ModelPdf;
 import id19110100.hcmute.edu.reaboadmin.R;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.barteksc.pdfviewer.PDFView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.imageview.ShapeableImageView;
 
@@ -23,12 +27,12 @@ import id19110100.hcmute.edu.reaboadmin.Model.Book;
 
 public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.BookViewHoler> {
     private BottomSheetDialog bottomSheetDialog;
-    private List<Book> mbooks;
+    private List<ModelPdf> mbooks;
     private Context context;
 
 
 
-    public void setData (Context context, List<Book> list){
+    public void setData (Context context, List<ModelPdf> list){
         this.mbooks = list;
         this.context = context;
         notifyDataSetChanged();
@@ -44,11 +48,26 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.BookVi
 
     @Override
     public void onBindViewHolder(@NonNull BookViewHoler holder, int position) {
-        Book book = mbooks.get(position);
+        ModelPdf book = mbooks.get(position);
         if (book == null){
             return;
             // Get resource
         }
+        String pdfId = book.getId();
+        String categoryId = book.getCategoryId();
+        String pdfUrl = book.getUrl();
+        String title = book.getTitle();
+        String description = book.getDescription();
+        String license = book.getLicense();
+        long timestamp = book.getTimestamp();
+        int countview = book.getViewCount();
+        holder.tv_item_book_name.setText(title);
+        holder.tv_item_book_cat.setText(license);
+        holder.tv_item_book_price.setText("Views: "+String.valueOf(countview));
+        MyApplication.loadPdfFromUrlSinglePageNoProgessbar(
+                ""+pdfUrl,
+                ""+title,
+                holder.item_book_img);
 
 
         holder.item_book_layout.setOnClickListener(new View.OnClickListener() {
@@ -64,9 +83,17 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.BookVi
                         bottomSheetDialog.dismiss();
                     }
                 });
-                ImageView imgBottomProduct=sheetView.findViewById(R.id.home_product_bottom_img);
+                PDFView imgBottomProduct=sheetView.findViewById(R.id.home_product_bottom_img);
                 TextView nameBottomProduct=sheetView.findViewById(R.id.home_product_bottom_product_name);
                 TextView priceBottomProduct=sheetView.findViewById(R.id.home_product_bottom_product_price);
+                TextView descriptionBottomProduct=sheetView.findViewById(R.id.tx_book_description);
+                MyApplication.loadPdfFromUrlSinglePageNoProgessbar(
+                        ""+pdfUrl,
+                        ""+title,
+                        imgBottomProduct);
+                nameBottomProduct.setText(title);
+                priceBottomProduct.setText(license);
+                descriptionBottomProduct.setText(description);
                 TextView btnback = sheetView.findViewById(R.id.btn_back);
                 btnback.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -96,7 +123,7 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.BookVi
     public class BookViewHoler extends RecyclerView.ViewHolder {
 
         ConstraintLayout item_book_layout;
-        ShapeableImageView item_book_img;
+        PDFView item_book_img;
         TextView tv_item_book_name,tv_item_book_cat,tv_item_book_price;
 
 

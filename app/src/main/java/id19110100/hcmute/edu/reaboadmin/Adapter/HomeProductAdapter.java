@@ -8,11 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import id19110100.hcmute.edu.reaboadmin.Class.MyApplication;
+import id19110100.hcmute.edu.reaboadmin.Model.ModelPdf;
 import id19110100.hcmute.edu.reaboadmin.R;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.github.barteksc.pdfviewer.PDFView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import java.util.ArrayList;
@@ -22,9 +26,9 @@ import id19110100.hcmute.edu.reaboadmin.Model.Product;
 public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter.HomeProductViewHolder>{
     private BottomSheetDialog bottomSheetDialog;
     private Context context;
-    private ArrayList<Product> products;
+    private ArrayList<ModelPdf> products;
 
-    public HomeProductAdapter(Context context, ArrayList<Product> products) {
+    public HomeProductAdapter(Context context, ArrayList<ModelPdf> products) {
         this.context = context;
         this.products = products;
     }
@@ -38,18 +42,30 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
 
     @Override
     public void onBindViewHolder(@NonNull HomeProductViewHolder holder, int position) {
-        Product product = products.get(position);
+        ModelPdf product = products.get(position);
         if(product ==null)
         {
             return;
         }
-        final int image= product.getImg();
-        final String name= product.getName();
-        final  String price=  String.valueOf(product.getPrice());
-        holder.imgProduct.setImageResource(product.getImg());
-        holder.nameProduct.setText(product.getName());
-        holder.priceProduct.setText(String.valueOf(product.getPrice()));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+        String pdfId = product.getId();
+        String categoryId = product.getCategoryId();
+        String pdfUrl = product.getUrl();
+        String title = product.getTitle();
+        String description = product.getDescription();
+        String license = product.getLicense();
+        long timestamp = product.getTimestamp();
+        int countview = product.getViewCount();
+
+
+
+        MyApplication.loadPdfFromUrlSinglePageNoProgessbar(
+                ""+pdfUrl,
+                ""+title,
+                holder.imgProduct);
+        holder.nameProduct.setText(title);
+        holder.priceProduct.setText(license);
+        holder.imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 bottomSheetDialog=new BottomSheetDialog(context,R.style.BottomSheetTheme);
@@ -62,9 +78,10 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
                         bottomSheetDialog.dismiss();
                     }
                 });
-                ImageView imgBottomProduct=sheetView.findViewById(R.id.home_product_bottom_img);
+                PDFView imgBottomProduct=sheetView.findViewById(R.id.home_product_bottom_img);
                 TextView nameBottomProduct=sheetView.findViewById(R.id.home_product_bottom_product_name);
                 TextView priceBottomProduct=sheetView.findViewById(R.id.home_product_bottom_product_price);
+                TextView descriptionBottomProduct=sheetView.findViewById(R.id.tx_book_description);
                 TextView btnback = sheetView.findViewById(R.id.btn_back);
                 btnback.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -72,9 +89,14 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
                         bottomSheetDialog.dismiss();
                     }
                 });
-                imgBottomProduct.setImageResource(image);
-                nameBottomProduct.setText(name);
-                priceBottomProduct.setText(price);
+                MyApplication.loadPdfFromUrlSinglePageNoProgessbar(
+                        ""+pdfUrl,
+                        ""+title,
+                        imgBottomProduct);
+
+                nameBottomProduct.setText(title);
+                priceBottomProduct.setText(license);
+                descriptionBottomProduct.setText(description);
 
                 bottomSheetDialog.setContentView(sheetView);
                 bottomSheetDialog.show();
@@ -95,7 +117,7 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
     }
 
     public class HomeProductViewHolder extends RecyclerView.ViewHolder{
-        private ImageView imgProduct;
+        private PDFView imgProduct;
         private TextView nameProduct,priceProduct;
 
         public HomeProductViewHolder(@NonNull View itemView) {

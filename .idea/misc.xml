@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/home_product.xml" value="0.10280797101449275" />
+        <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/home_product_bottom_layout.xml" value="0.10280797101449275" />
+        <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/item_book.xml" value="0.12360688956433637" />
         <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/drawable-v24/btn_confirm_order.xml" value="0.1415" />
         <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/drawable/bg_change.xml" value="0.143" />
         <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/drawable/bg_image_slider_indicator.xml" value="0.143" />

@@ -2,6 +2,7 @@ package id19110100.hcmute.edu.reaboadmin.Adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,11 +10,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import id19110100.hcmute.edu.reaboadmin.Model.Category;
+import id19110100.hcmute.edu.reaboadmin.Model.ModelPdf;
+import id19110100.hcmute.edu.reaboadmin.PdfListAdminActivity;
 import id19110100.hcmute.edu.reaboadmin.R;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -23,6 +32,9 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
     private HomeFilterProduct homeFilterProduct;
     private Activity homeActivity;
     private ArrayList<Category> homeCategories;
+    private ArrayList<ModelPdf> pdfArrayList;
+    private static final String TAG = "PDF_LIST_TAG";
+    private AdapterPdfAdmin adapterPdfAdmin;
 
 
 
@@ -60,8 +72,8 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
             products.add(new Product(1, "The old man and the sea", 50000,R.drawable.hot_deal_imh,""));
             products.add(new Product(1, "The old man and the sea", 50000,R.drawable.hot_deal_imh,""));
             products.add(new Product(1, "The old man and the sea", 50000,R.drawable.hot_deal_imh,""));
-
-            homeFilterProduct.callBack(position, products);
+            loadPdfList(position);
+            //homeFilterProduct.callBack(position, products);
             checked = false;
         }
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -77,8 +89,8 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
                     products.add(new Product(1, "The Old Man And The Sea", 50000,R.drawable.hot_deal_imh,""));
                     products.add(new Product(1, "The Old Man And The Sea", 50000,R.drawable.hot_deal_imh,""));
                     products.add(new Product(1, "The Old Man And The Sea", 50000,R.drawable.hot_deal_imh,""));
-
-                    homeFilterProduct.callBack(row_index, products);
+                    loadPdfList(row_index);
+                    //homeFilterProduct.callBack(row_index, products);
                 }
                 else if(row_index==1)
                 {
@@ -89,8 +101,8 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
                     products.add(new Product(2,"The Prophet",60000,R.drawable.rank_img,""));
                     products.add(new Product(3,"The Prophet",70000,R.drawable.rank_img,""));
                     products.add(new Product(4,"The Prophet",80000,R.drawable.rank_img,""));
-
-                    homeFilterProduct.callBack(row_index, products);
+                    loadPdfList(row_index);
+                    //homeFilterProduct.callBack(row_index, products);
 
                 }
                 else if(row_index==2)
@@ -100,9 +112,9 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
 
                     products.add(new Product(1,"The Danish Girl",50000,R.drawable.new_img,""));
                     products.add(new Product(2,"The Danish Girl",60000,R.drawable.new_img,""));
+                    loadPdfList(row_index);
 
-
-                    homeFilterProduct.callBack(row_index, products);
+                    //homeFilterProduct.callBack(row_index, products);
 
                 }
                 else if(row_index==3)
@@ -111,8 +123,8 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
                     //products = getProductbyCate("Drink");
 
                     products.add(new Product(1,"Thien That Ra Khong Kho",50000,R.drawable.zen_img,""));
-
-                    homeFilterProduct.callBack(row_index, products);
+                    loadPdfList(row_index);
+                    //homeFilterProduct.callBack(row_index, products);
 
                 }
                 else if(row_index==4)
@@ -126,8 +138,8 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
                     products.add(new Product(1,"Doi Tho",50000,R.drawable.learning_img,""));
                     products.add(new Product(1,"Doi Tho",50000,R.drawable.learning_img,""));
 
-
-                    homeFilterProduct.callBack(row_index, products);
+                    loadPdfList(row_index);
+                    //homeFilterProduct.callBack(row_index, products);
 
                 }
             }
@@ -173,5 +185,33 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
             nameCategory = itemView.findViewById(R.id.item_category_name);
             cardView=itemView.findViewById(R.id.item_category_cv);
         }
+    }
+
+    private void loadPdfList(int position) {
+        //init
+        pdfArrayList = new ArrayList<>();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books");
+        ref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        pdfArrayList.clear();
+                        for(DataSnapshot ds: snapshot.getChildren()){
+                            //get data
+                            ModelPdf model = ds.getValue(ModelPdf.class);
+                            //add to list
+                            pdfArrayList.add(model);
+
+                            Log.d(TAG, "onDataChange: "+model.getId()+" "+model.getTitle());
+                        }
+                        homeFilterProduct.callBack(position, pdfArrayList);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
     }
 }

@@ -21,7 +21,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:src="@color/mallard_100"
             ></com.google.android.material.imageview.ShapeableImageView>
-        <com.google.android.material.imageview.ShapeableImageView
+        <com.github.barteksc.pdfviewer.PDFView
             android:id="@+id/item_book_img"
             android:layout_width="match_parent"
             android:layout_height="130dp"
@@ -31,7 +31,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:src="@drawable/banner1">
-        </com.google.android.material.imageview.ShapeableImageView>
+        </com.github.barteksc.pdfviewer.PDFView>
         <TextView
             android:id="@+id/tv_item_book_price"
             android:layout_width="match_parent"
