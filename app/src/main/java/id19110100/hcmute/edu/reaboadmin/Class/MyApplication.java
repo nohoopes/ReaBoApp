@@ -315,13 +315,4 @@ public class MyApplication extends Application {
                 });
     }
 
-    ArrayList<ModelPdf> listbooks = new ArrayList<>();
-
-    public void setListbooks(ArrayList<ModelPdf> listbooks) {
-        this.listbooks = listbooks;
-    }
-
-    public ArrayList<ModelPdf> getListbooks(){
-        return this.listbooks;
-    }
 }
