@@ -36,7 +36,7 @@ import java.util.HashMap;
 import id19110100.hcmute.edu.reaboadmin.Model.Book;
 
 public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryViewHolder> {
-    private BottomSheetDialog bottomSheetDialog;
+
     private Context context;
     private ArrayList<Library> libraries;
 
@@ -62,15 +62,15 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
         if (library == null){
             return;
         }
-        holder.nameProduct.setText(library.getPdf().getTitle());
+        holder.nameProduct.setText(library.getBooks().getTitle());
 
-        MyApplication.loadFirstPage(library.getPdf().getUrl(), holder.imgProduct);
+        MyApplication.loadFirstPage(library.getBooks().getUrl(), holder.imgProduct);
         holder.btnReadnow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 uploadHistoryToDb(library, System.currentTimeMillis());
                 Intent intent1 = new Intent(context, PdfViewActivity.class);
-                intent1.putExtra("bookId", library.getPdf().getId());
+                intent1.putExtra("bookId", library.getBooks().getId());
                 context.startActivity(intent1);
             }
         });
@@ -83,7 +83,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
         HashMap<String,Object> hashMap = new HashMap<>();
         hashMap.put("uid", ""+uid);
         hashMap.put("id", ""+timestamp);
-        hashMap.put("Books", ""+library.getPdf());
+        hashMap.put("Books", library.getBooks());
         hashMap.put("timestamp", timestamp);
 
         //db ref

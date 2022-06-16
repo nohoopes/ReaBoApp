@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import id19110100.hcmute.edu.reaboadmin.Class.MyApplication;
+import id19110100.hcmute.edu.reaboadmin.Model.Library;
 import id19110100.hcmute.edu.reaboadmin.Model.ModelPdf;
 import id19110100.hcmute.edu.reaboadmin.R;
 
@@ -17,9 +18,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.barteksc.pdfviewer.PDFView;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import id19110100.hcmute.edu.reaboadmin.Model.Product;
 
@@ -27,6 +34,7 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
     private BottomSheetDialog bottomSheetDialog;
     private Context context;
     private ArrayList<ModelPdf> products;
+    private FirebaseAuth firebaseAuth;
 
     public HomeProductAdapter(Context context, ArrayList<ModelPdf> products) {
         this.context = context;
@@ -37,6 +45,7 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
     @Override
     public HomeProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.home_product,parent,false);
+        firebaseAuth = FirebaseAuth.getInstance();
         return new HomeProductViewHolder(view);
     }
 
@@ -74,6 +83,7 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
                 sheetView.findViewById(R.id.btn_add_to_library).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        uploadLibraryToDb(product, System.currentTimeMillis());
                         Toast.makeText(context,"Added to Library",Toast.LENGTH_SHORT).show();
                         bottomSheetDialog.dismiss();
                     }
@@ -128,5 +138,29 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
         }
     }
 
+    private void uploadLibraryToDb(ModelPdf product, Long timestamp) {
+        String uid = firebaseAuth.getUid();
+
+        //set up data
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("uid", ""+uid);
+        hashMap.put("id", ""+timestamp);
+        hashMap.put("Books", product);
+
+        //db ref
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Library");
+        ref.child(""+timestamp)
+                .setValue(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
+    }
 }
 

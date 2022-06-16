@@ -46,7 +46,7 @@ public class LibraryFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.library,container,false);
         InflateRecyclerView(view);
-        libraries = new ArrayList<>();
+        /*libraries = new ArrayList<>();
         ModelPdf modelA = new ModelPdf();
         modelA.setId("1");
         modelA.setUrl("https://firebasestorage.googleapis.com/v0/b/reabo-456e1.appspot.com/o/Books%2F1655351869911?alt=media&token=adfa0d31-2b88-41c0-a257-a0091e862f25");
@@ -70,7 +70,9 @@ public class LibraryFragment extends Fragment {
         libraries.add(library2);
         libraries.add(library3);
 
-        Classify(libraries);
+        Classify(libraries);*/
+
+        loadLibrary();
 
         return view;
     }
@@ -79,7 +81,7 @@ public class LibraryFragment extends Fragment {
         //init arraylist
         libraries = new ArrayList<>();
         //get all libraries from firebase
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Libraries");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Library");
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -117,7 +119,7 @@ public class LibraryFragment extends Fragment {
         }
 
         for (Library library : libraries) {
-            char firstChar = library.getPdf().getTitle().charAt(0);
+            char firstChar = library.getBooks().getTitle().charAt(0);
             switch (firstChar) {
                 case ('a'):
                 case ('A'): {

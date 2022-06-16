@@ -2,15 +2,15 @@ package id19110100.hcmute.edu.reaboadmin.Model;
 
 public class Library {
     String id;
-    ModelPdf pdf;
+    ModelPdf Books;
     String uid;
 
     public Library() {
     }
 
-    public Library(String id, ModelPdf pdf, String uid) {
+    public Library(String id, ModelPdf Books, String uid) {
         this.id = id;
-        this.pdf = pdf;
+        this.Books = Books;
         this.uid = uid;
     }
 
@@ -22,12 +22,12 @@ public class Library {
         this.id = id;
     }
 
-    public ModelPdf getPdf() {
-        return pdf;
+    public ModelPdf getBooks() {
+        return Books;
     }
 
-    public void setPdf(ModelPdf pdf) {
-        this.pdf = pdf;
+    public void setBooks(ModelPdf books) {
+        Books = books;
     }
 
     public String getUid() {
