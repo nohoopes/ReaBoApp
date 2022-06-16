@@ -365,7 +365,7 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
                     Log.d(TAG, "onDataChange: "+model.getId()+" "+model.getTitle());
                 }
 
-                ArrayList<ModelPdf> hotdeals = getModelPDFbyCateID(pdfArrayList,"1655351811971");
+                ArrayList<ModelPdf> hotdeals = getModelPDFbyCateID(pdfArrayList,"1655377410674");
 
                 homeFilterProduct.callBack(position, hotdeals);
 
@@ -396,7 +396,7 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
                     Log.d(TAG, "onDataChange: "+model.getId()+" "+model.getTitle());
                 }
 
-                ArrayList<ModelPdf> hotdeals = getModelPDFbyCateID(pdfArrayList,"1655351752788");
+                ArrayList<ModelPdf> hotdeals = getModelPDFbyCateID(pdfArrayList,"1655377371010");
 
                 homeFilterProduct.callBack(position, hotdeals);
 

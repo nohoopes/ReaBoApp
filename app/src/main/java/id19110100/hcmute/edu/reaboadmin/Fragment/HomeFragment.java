@@ -271,14 +271,14 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
                         listbooks = pdfArrayList;
                         HomeBookAdapter homeBookAdapter_ThienDinh = new HomeBookAdapter();
                         // Get Romantic-type books
-                        ArrayList<ModelPdf> romantic_books =getModelPDFbyCateID(listbooks,"1655351774971");
+                        ArrayList<ModelPdf> romantic_books =getModelPDFbyCateID(listbooks,"1655377410674");
                         homeBookAdapter_ThienDinh.setData(context,romantic_books);
                         home_thiendinh_recyclerview.setAdapter(homeBookAdapter_ThienDinh);
                         home_thiendinh_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
                         home_thiendinh_recyclerview.setHasFixedSize(true);
                         home_thiendinh_recyclerview.setNestedScrollingEnabled(false);
                         // Set data for cookery cate
-                        ArrayList<ModelPdf> cookery_books =getModelPDFbyCateID(listbooks,"1655351761011");
+                        ArrayList<ModelPdf> cookery_books =getModelPDFbyCateID(listbooks,"1655377378416");
                         HomeBookAdapter homeBookAdapter_Cookery = new HomeBookAdapter();
                         homeBookAdapter_Cookery.setData(context,cookery_books);
                         home_cooking_recyclerview.setAdapter(homeBookAdapter_Cookery);
