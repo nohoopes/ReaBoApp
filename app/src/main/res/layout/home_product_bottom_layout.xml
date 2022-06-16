@@ -123,6 +123,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"></TextView>
                 <TextView
+                    android:id="@+id/txt_cateBook"
                     android:layout_marginLeft="10dp"
                     android:textSize="20dp"
                     android:textColor="@color/white"

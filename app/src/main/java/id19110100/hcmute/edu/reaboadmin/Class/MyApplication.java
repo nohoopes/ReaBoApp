@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
@@ -313,4 +315,13 @@ public class MyApplication extends Application {
                 });
     }
 
+    ArrayList<ModelPdf> listbooks = new ArrayList<>();
+
+    public void setListbooks(ArrayList<ModelPdf> listbooks) {
+        this.listbooks = listbooks;
+    }
+
+    public ArrayList<ModelPdf> getListbooks(){
+        return this.listbooks;
+    }
 }

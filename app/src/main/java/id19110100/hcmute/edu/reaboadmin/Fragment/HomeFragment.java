@@ -6,12 +6,14 @@ import id19110100.hcmute.edu.reaboadmin.Adapter.HomeBookAdapter;
 import id19110100.hcmute.edu.reaboadmin.Adapter.HomeCategoryAdapter;
 import id19110100.hcmute.edu.reaboadmin.Adapter.HomeFilterProduct;
 import id19110100.hcmute.edu.reaboadmin.Adapter.HomeProductAdapter;
+import id19110100.hcmute.edu.reaboadmin.Class.MyApplication;
 import id19110100.hcmute.edu.reaboadmin.Model.Banner;
-import id19110100.hcmute.edu.reaboadmin.Model.Book;
 import id19110100.hcmute.edu.reaboadmin.Model.Category;
+import id19110100.hcmute.edu.reaboadmin.Model.ModelCategoryAd;
 import id19110100.hcmute.edu.reaboadmin.Model.ModelPdf;
-import id19110100.hcmute.edu.reaboadmin.Model.Product;
 import  id19110100.hcmute.edu.reaboadmin.R;
+
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
@@ -98,10 +100,11 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
     //variables
     private String categoryId, categoryTitle;
     Context context;
+    Activity activity;
     List<ModelPdf> listmodelpdf;
-    private int test_int_data =0;
 
-    public static ArrayList<ModelPdf> listBooks;
+    public static ArrayList<ModelPdf> listbooks;
+    String name;
 
 
 
@@ -119,6 +122,7 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
         home_cooking_recyclerview = home.findViewById(R.id.home_cooking_recyclerview);
 
         context = this.getActivity();
+        activity = this.getActivity();
         searchRestaurantText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
@@ -165,7 +169,12 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
 
         listmodelpdf = new ArrayList<>();
         categoryId = "1654416458010";
+
         loadPdfList();
+
+
+
+
 
 
 
@@ -246,7 +255,6 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
     private void loadPdfList() {
         //init
         pdfArrayList = new ArrayList<>();
-
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books");
         ref.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -260,19 +268,19 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
 
                             Log.d(TAG, "onDataChange: "+model.getId()+" "+model.getTitle());
                         }
-                        listBooks = pdfArrayList;
-                        // Set data for thien dinh cate
+                        listbooks = pdfArrayList;
                         HomeBookAdapter homeBookAdapter_ThienDinh = new HomeBookAdapter();
-                        homeBookAdapter_ThienDinh.setData(context,listBooks);
+                        // Get Romantic-type books
+                        ArrayList<ModelPdf> romantic_books =getModelPDFbyCateID(listbooks,"1655351774971");
+                        homeBookAdapter_ThienDinh.setData(context,romantic_books);
                         home_thiendinh_recyclerview.setAdapter(homeBookAdapter_ThienDinh);
                         home_thiendinh_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
                         home_thiendinh_recyclerview.setHasFixedSize(true);
                         home_thiendinh_recyclerview.setNestedScrollingEnabled(false);
-                        //adapterPdfAdmin = new AdapterPdfAdmin(context, pdfArrayList);
-                        //binding.bookRv.setAdapter(adapterPdfAdmin);
                         // Set data for cookery cate
+                        ArrayList<ModelPdf> cookery_books =getModelPDFbyCateID(listbooks,"1655351761011");
                         HomeBookAdapter homeBookAdapter_Cookery = new HomeBookAdapter();
-                        homeBookAdapter_Cookery.setData(context,listBooks);
+                        homeBookAdapter_Cookery.setData(context,cookery_books);
                         home_cooking_recyclerview.setAdapter(homeBookAdapter_Cookery);
                         home_cooking_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
                         home_cooking_recyclerview.setHasFixedSize(true);
@@ -285,7 +293,16 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
 
                     }
                 });
+    }
 
+    public ArrayList<ModelPdf> getModelPDFbyCateID(ArrayList<ModelPdf> booklist,String id){
+        ArrayList<ModelPdf> return_array= new ArrayList<>();
+        for (int i=0;i< booklist.size();i++){
+            if (booklist.get(i).getCategoryId().equals(id)){
+                return_array.add(booklist.get(i));
+            }
+        }
+        return return_array;
     }
 
 

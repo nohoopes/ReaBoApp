@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import id19110100.hcmute.edu.reaboadmin.Class.MyApplication;
+import id19110100.hcmute.edu.reaboadmin.Model.ModelCategoryAd;
 import id19110100.hcmute.edu.reaboadmin.Model.ModelPdf;
 import id19110100.hcmute.edu.reaboadmin.R;
 
@@ -21,6 +22,7 @@ import com.github.barteksc.pdfviewer.PDFView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.imageview.ShapeableImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import id19110100.hcmute.edu.reaboadmin.Model.Book;
@@ -37,6 +39,8 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.BookVi
         this.context = context;
         notifyDataSetChanged();
     }
+
+
 
 
     @NonNull
@@ -87,6 +91,7 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.BookVi
                 TextView nameBottomProduct=sheetView.findViewById(R.id.home_product_bottom_product_name);
                 TextView priceBottomProduct=sheetView.findViewById(R.id.home_product_bottom_product_price);
                 TextView descriptionBottomProduct=sheetView.findViewById(R.id.tx_book_description);
+                TextView cateBook = sheetView.findViewById(R.id.txt_cateBook);
                 MyApplication.loadPdfFromUrlSinglePageNoProgessbar(
                         ""+pdfUrl,
                         ""+title,
@@ -94,6 +99,7 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.BookVi
                 nameBottomProduct.setText(title);
                 priceBottomProduct.setText(license);
                 descriptionBottomProduct.setText(description);
+                MyApplication.loadCategory(categoryId,cateBook);
                 TextView btnback = sheetView.findViewById(R.id.btn_back);
                 btnback.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -119,6 +125,7 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.BookVi
         }
         return 0;
     }
+
 
     public class BookViewHoler extends RecyclerView.ViewHolder {
 
