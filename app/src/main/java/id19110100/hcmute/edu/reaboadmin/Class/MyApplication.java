@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 import com.github.barteksc.pdfviewer.PDFView;
 import com.github.barteksc.pdfviewer.listener.OnErrorListener;
@@ -21,6 +22,7 @@ import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener;
 import com.github.barteksc.pdfviewer.listener.OnPageErrorListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,7 +37,10 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
 
+import id19110100.hcmute.edu.reaboadmin.Model.Favorite;
+import id19110100.hcmute.edu.reaboadmin.Model.Library;
 import id19110100.hcmute.edu.reaboadmin.Model.ModelPdf;
+import id19110100.hcmute.edu.reaboadmin.R;
 
 public class MyApplication extends Application {
     @Override
@@ -361,6 +366,85 @@ public class MyApplication extends Application {
                         Log.d(TAG, "onFailure: fail "+e.getMessage());
                     }
                 });
+
+    }
+    static Boolean return_data;
+    public static void checkFavorite(String userID, ModelPdf book, TextView favoritebtn, Context context, String uid, BottomSheetDialog bottomsheet){
+        return_data = false;
+        //ArrayList<Favorite> favorites = new ArrayList<>();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Favorite");
+        ref.orderByChild("uid").equalTo(userID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Favorite my_favorite = new Favorite();
+                for (DataSnapshot ds:snapshot.getChildren()){
+                    Favorite favorite = ds.getValue(Favorite.class);
+                    if(favorite.getBooks().getId().equals(book.getId())) {
+                        my_favorite = favorite;
+                        return_data = true;
+                    }
+                }
+                final Favorite my_favorite_1= my_favorite;
+                if(return_data){
+                    favoritebtn.setBackground(ContextCompat.getDrawable(context, R.drawable.heart_check));
+                    favoritebtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                                deleteFavorite(my_favorite_1.getId());
+                                favoritebtn.setBackground(ContextCompat.getDrawable(context, R.drawable.heart));
+                                Toast.makeText(context, "Removed from Favorite", Toast.LENGTH_SHORT).show();
+                                bottomsheet.dismiss();
+                        }
+                        public void deleteFavorite(String id){
+                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Favorite");
+                            ref.child(id).removeValue();
+                        }
+
+                    });
+                }else{
+                    favoritebtn.setBackground(ContextCompat.getDrawable(context, R.drawable.heart));
+                    favoritebtn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            uploadFavoriteToDb(book,System.currentTimeMillis(),uid);
+                            Toast.makeText(context, "Added to Favorite", Toast.LENGTH_SHORT).show();
+                            favoritebtn.setBackground(ContextCompat.getDrawable(context, R.drawable.heart_check));
+
+                        }
+                        public void uploadFavoriteToDb(ModelPdf product, Long timestamp,String uid) {
+
+                            //set up data
+                            HashMap<String,Object> hashMap = new HashMap<>();
+                            hashMap.put("uid", ""+uid);
+                            hashMap.put("id", ""+timestamp);
+                            hashMap.put("Books", product);
+
+                            //db ref
+                            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Favorite");
+                            ref.child(""+timestamp)
+                                    .setValue(hashMap)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void unused) {
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                        }
+                                    });
+                        }
+
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
     }
 
