@@ -56,8 +56,6 @@ public class MyApplication extends Application {
         //add tag
         String TAG = "DELETE_BOOK_TAG";
 
-
-
         Log.d(TAG, "deleteBook: Deleting...");
         //progress
         ProgressDialog progressDialog = new ProgressDialog(context);

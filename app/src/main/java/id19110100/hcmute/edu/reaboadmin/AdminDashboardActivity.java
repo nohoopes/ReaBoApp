@@ -115,10 +115,10 @@ public class AdminDashboardActivity extends AppCompatActivity {
 
                     //add to arraylist
                     categoryAdArrayList.add(model);
-                    adapterCategoryAd = new AdapterCategoryAd(AdminDashboardActivity.this, categoryAdArrayList);
-                    //set adapter to recycleview
-                    binding.categoriesRv.setAdapter(adapterCategoryAd);
                 }
+                adapterCategoryAd = new AdapterCategoryAd(AdminDashboardActivity.this, categoryAdArrayList);
+                //set adapter to recycleview
+                binding.categoriesRv.setAdapter(adapterCategoryAd);
             }
 
             @Override
