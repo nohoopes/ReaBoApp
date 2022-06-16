@@ -32,9 +32,6 @@
             android:name=".PdfAddActivity"
             android:exported="false" />
         <activity
-            android:name=".UserHomeActivity"
-            android:exported="false" />
-        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity

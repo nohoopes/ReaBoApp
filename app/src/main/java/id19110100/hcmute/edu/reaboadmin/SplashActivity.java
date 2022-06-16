@@ -55,7 +55,7 @@ public class SplashActivity extends AppCompatActivity {
                             String userType = ""+snapshot.child("userType").getValue();
                             //check
                             if(userType.equals("user")){
-                                startActivity(new Intent(SplashActivity.this, UserHomeActivity.class));
+                                startActivity(new Intent(SplashActivity.this, NavigationBar.class));
                                 finish();
                             }
                             else if (userType.equals("admin")){

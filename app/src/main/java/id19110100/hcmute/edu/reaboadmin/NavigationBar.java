@@ -9,12 +9,15 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import id19110100.hcmute.edu.reaboadmin.Fragment.FavoriteFragment;
 import id19110100.hcmute.edu.reaboadmin.Fragment.HistoryFragment;
@@ -37,11 +40,18 @@ public class NavigationBar extends AppCompatActivity implements NavigationView.O
     //view binding
     private NavBarBinding binding;
 
+    //firebase auth
+    private FirebaseAuth firebaseAuth;
+
     TextView user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //init firebase auth
+        firebaseAuth = FirebaseAuth.getInstance();
+
         binding = NavBarBinding.inflate(getLayoutInflater());
         setContentView(R.layout.nav_bar);
 
@@ -57,8 +67,9 @@ public class NavigationBar extends AppCompatActivity implements NavigationView.O
         NavigationView navigationView=findViewById(R.id.navigation_view);
 
         LinearLayout nav_header = (LinearLayout) navigationView.inflateHeaderView(R.layout.nav_header);
+        user_name = (TextView) nav_header.findViewById(R.id.nav_header_user_name);
 
-
+        checkUser();
 
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -116,7 +127,8 @@ public class NavigationBar extends AppCompatActivity implements NavigationView.O
 
         else if(id==R.id.nav_logout)
         {
-
+            firebaseAuth.signOut();
+            checkUser();
         }
         drawerLayout.closeDrawer(GravityCompat.START);
 
@@ -138,5 +150,17 @@ public class NavigationBar extends AppCompatActivity implements NavigationView.O
         transaction.commit();
     }
 
-
+    private void checkUser() {
+        //get current user
+        FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+        if(firebaseUser == null){
+            //not logged in
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+        else{
+            String email = firebaseUser.getEmail();
+            //
+            user_name.setText(email);
+        }
+    }
 }
