@@ -2,6 +2,7 @@ package id19110100.hcmute.edu.reaboadmin.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import id19110100.hcmute.edu.reaboadmin.Class.MyApplication;
 import id19110100.hcmute.edu.reaboadmin.Model.History;
+import id19110100.hcmute.edu.reaboadmin.PdfViewActivity;
 import id19110100.hcmute.edu.reaboadmin.R;
 
 import androidx.annotation.NonNull;
@@ -50,7 +52,9 @@ public class HistoryReadingAdapter extends  RecyclerView.Adapter<HistoryReadingA
         holder.btnReadHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent1 = new Intent(context, PdfViewActivity.class);
+                intent1.putExtra("bookId", history.getBooks().getId());
+                context.startActivity(intent1);
             }
         });
         MyApplication.loadFirstPage(history.getBooks().getUrl(), holder.imgHistory);

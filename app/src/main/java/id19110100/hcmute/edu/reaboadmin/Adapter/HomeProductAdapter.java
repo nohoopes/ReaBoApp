@@ -2,6 +2,8 @@ package id19110100.hcmute.edu.reaboadmin.Adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,7 @@ import id19110100.hcmute.edu.reaboadmin.Model.ModelPdf;
 import id19110100.hcmute.edu.reaboadmin.R;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.barteksc.pdfviewer.PDFView;
@@ -85,13 +88,15 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
                     public void onClick(View view) {
                         uploadLibraryToDb(product, System.currentTimeMillis());
                         Toast.makeText(context,"Added to Library",Toast.LENGTH_SHORT).show();
-                        bottomSheetDialog.dismiss();
                     }
                 });
                 PDFView imgBottomProduct=sheetView.findViewById(R.id.home_product_bottom_img);
                 TextView nameBottomProduct=sheetView.findViewById(R.id.home_product_bottom_product_name);
                 TextView priceBottomProduct=sheetView.findViewById(R.id.home_product_bottom_product_price);
                 TextView descriptionBottomProduct=sheetView.findViewById(R.id.tx_book_description);
+                TextView favoriteBtn = sheetView.findViewById(R.id.txt_favorite);
+                String uid = firebaseAuth.getUid();
+                MyApplication.checkFavorite(uid,product,favoriteBtn,context ,uid,bottomSheetDialog);
                 TextView btnback = sheetView.findViewById(R.id.btn_back);
                 btnback.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -162,5 +167,7 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
                     }
                 });
     }
+
+
 }
 

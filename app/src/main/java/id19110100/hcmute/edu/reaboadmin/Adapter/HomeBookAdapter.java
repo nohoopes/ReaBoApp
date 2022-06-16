@@ -19,10 +19,16 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.barteksc.pdfviewer.PDFView;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import id19110100.hcmute.edu.reaboadmin.Model.Book;
@@ -31,6 +37,7 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.BookVi
     private BottomSheetDialog bottomSheetDialog;
     private List<ModelPdf> mbooks;
     private Context context;
+    private FirebaseAuth firebaseAuth;
 
 
 
@@ -53,6 +60,7 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.BookVi
     @Override
     public void onBindViewHolder(@NonNull BookViewHoler holder, int position) {
         ModelPdf book = mbooks.get(position);
+        firebaseAuth = FirebaseAuth.getInstance();
         if (book == null){
             return;
             // Get resource
@@ -100,11 +108,22 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.BookVi
                 priceBottomProduct.setText(license);
                 descriptionBottomProduct.setText(description);
                 MyApplication.loadCategory(categoryId,cateBook);
+                TextView favoriteBtn = sheetView.findViewById(R.id.txt_favorite);
+                String uid = firebaseAuth.getUid();
+                MyApplication.checkFavorite(uid,book,favoriteBtn,context ,uid,bottomSheetDialog);
                 TextView btnback = sheetView.findViewById(R.id.btn_back);
                 btnback.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         bottomSheetDialog.dismiss();
+                    }
+                });
+
+                sheetView.findViewById(R.id.btn_add_to_library).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        uploadLibraryToDb(book, System.currentTimeMillis());
+                        Toast.makeText(context,"Added to Library",Toast.LENGTH_SHORT).show();
                     }
                 });
                 //imgBottomProduct.setImageResource(image);
@@ -144,5 +163,30 @@ public class HomeBookAdapter extends RecyclerView.Adapter<HomeBookAdapter.BookVi
             tv_item_book_price = itemView.findViewById(R.id.tv_item_book_price);
 
         }
+    }
+
+    private void uploadLibraryToDb(ModelPdf product, Long timestamp) {
+        String uid = firebaseAuth.getUid();
+
+        //set up data
+        HashMap<String,Object> hashMap = new HashMap<>();
+        hashMap.put("uid", ""+uid);
+        hashMap.put("id", ""+timestamp);
+        hashMap.put("Books", product);
+
+        //db ref
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Library");
+        ref.child(""+timestamp)
+                .setValue(hashMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                    }
+                });
     }
 }
