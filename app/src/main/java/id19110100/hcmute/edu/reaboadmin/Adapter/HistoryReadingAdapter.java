@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import id19110100.hcmute.edu.reaboadmin.Model.History;
 import id19110100.hcmute.edu.reaboadmin.R;
 
 import androidx.annotation.NonNull;
@@ -17,38 +19,34 @@ import id19110100.hcmute.edu.reaboadmin.Model.Book;
 import id19110100.hcmute.edu.reaboadmin.Model.Product;
 
 public class HistoryReadingAdapter extends  RecyclerView.Adapter<HistoryReadingAdapter.HistoryOrderViewHolder>{
-    private final ArrayList<Book> history;
-    private ArrayList<Product> products;
-    private double totalOrderPrice;
+    private final ArrayList<History> histories;
 
-
-    public HistoryReadingAdapter(ArrayList<Book> orders) {
-        this.history = orders;
+    public HistoryReadingAdapter(ArrayList<History> histories) {
+        this.histories = histories;
     }
 
     @NonNull
     @Override
     public HistoryOrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.history_book_item,parent,false);
-        return  new HistoryOrderViewHolder(view);
+        return new HistoryOrderViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HistoryOrderViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Book order = history.get(position);
-        if(order ==null)
+        History history = histories.get(position);
+        if(history ==null)
         {
             return;
         }
-
-
+        //holder.nameHistory.setText(history.);
     }
 
     @Override
     public int getItemCount() {
-        if(history !=null)
+        if(histories !=null)
         {
-            return history.size();
+            return histories.size();
         }
         return 0;
     }

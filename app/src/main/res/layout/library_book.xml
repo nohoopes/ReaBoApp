@@ -11,7 +11,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="90dp">
-        <ImageView
+        <com.github.barteksc.pdfviewer.PDFView
             android:id="@+id/library_book_img"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="7dp"

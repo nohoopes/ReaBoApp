@@ -40,7 +40,7 @@
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/A_categoty_listview"
+            android:id="@+id/A_category_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_A_category"
@@ -56,13 +56,13 @@
             android:text="B"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/A_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/A_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/B_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/B_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_B_category"
@@ -78,13 +78,13 @@
             android:text="C"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/B_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/B_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/C_categoty_listview"
+            android:id="@+id/C_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@+id/tv_D_category"
@@ -101,13 +101,13 @@
             android:text="D"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/C_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/C_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/D_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/D_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_D_category"
@@ -123,13 +123,13 @@
             android:text="E"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/D_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/D_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/E_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/E_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_E_category"
@@ -145,13 +145,13 @@
             android:text="F"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/E_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/E_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/F_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/F_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_F_category"
@@ -167,13 +167,13 @@
             android:text="G"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/F_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/F_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/G_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/G_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_G_category"
@@ -189,13 +189,13 @@
             android:text="H"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/G_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/G_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/H_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/H_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_H_category"
@@ -211,13 +211,13 @@
             android:text="I"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/H_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/H_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/I_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/I_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_I_category"
@@ -233,13 +233,13 @@
             android:text="J"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/I_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/I_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/J_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/J_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_J_category"
@@ -255,13 +255,13 @@
             android:text="K"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/J_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/J_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/K_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/K_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_K_category"
@@ -277,13 +277,13 @@
             android:text="L"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/K_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/K_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/L_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/L_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_L_category"
@@ -299,13 +299,13 @@
             android:text="M"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/L_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/L_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/M_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/M_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_M_category"
@@ -321,13 +321,13 @@
             android:text="N"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/M_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/M_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/N_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/N_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_N_category"
@@ -343,13 +343,13 @@
             android:text="O"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/N_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/N_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/O_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/O_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_O_category"
@@ -365,13 +365,13 @@
             android:text="P"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/O_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/O_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/P_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/P_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_P_category"
@@ -387,13 +387,13 @@
             android:text="Q"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/P_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/P_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/Q_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Q_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_Q_category"
@@ -409,13 +409,13 @@
             android:text="R"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/Q_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/Q_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/R_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/R_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_R_category"
@@ -431,13 +431,13 @@
             android:text="S"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/R_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/R_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/S_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/S_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_S_category"
@@ -453,13 +453,13 @@
             android:text="T"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/S_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/S_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/T_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/T_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_T_category"
@@ -475,13 +475,13 @@
             android:text="U"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/T_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/T_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/U_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/U_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_U_category"
@@ -497,13 +497,13 @@
             android:text="V"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/U_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/U_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/V_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/V_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_V_category"
@@ -519,13 +519,13 @@
             android:text="W"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/V_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/V_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/W_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/W_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_W_category"
@@ -541,14 +541,14 @@
             android:text="X"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/W_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/W_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
+        <androidx.recyclerview.widget.RecyclerView
             android:textColor="@color/mallard"
-            android:id="@+id/X_categoty_listview"
+            android:id="@+id/X_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_X_category"
@@ -564,13 +564,13 @@
             android:text="Y"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/X_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/X_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/Y_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Y_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_Y_category"
@@ -587,13 +587,35 @@
             android:text="Z"
             android:fontFamily="@font/intrepid"
             android:textSize="25dp"
-            app:layout_constraintTop_toBottomOf="@id/Y_categoty_listview"
+            app:layout_constraintTop_toBottomOf="@id/Y_category_listview"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_marginLeft="10dp"
             tools:layout_editor_absoluteX="101dp"
             tools:layout_editor_absoluteY="156dp" />
-        <ListView
-            android:id="@+id/Z_categoty_listview"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Z_category_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_Z_category"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+        <TextView
+            android:textColor="@color/white"
+            android:id="@+id/tv_other_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Other"
+            android:fontFamily="@font/intrepid"
+            android:textSize="25dp"
+            app:layout_constraintTop_toBottomOf="@id/Y_category_listview"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="10dp"
+            tools:layout_editor_absoluteX="101dp"
+            tools:layout_editor_absoluteY="156dp" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/Other_category_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/tv_Z_category"
