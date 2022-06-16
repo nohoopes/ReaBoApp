@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageMetadata;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
@@ -147,6 +149,60 @@ public class MyApplication extends Application {
     }
 
     //load pdf from url with first page
+    public static void loadPdfFromUrlSinglePageNoProgessbar(String pdfUrl, String pdfTitle, PDFView pdfView) {
+
+        //add tag
+        String TAG = "PDF_FROM_URL_TAG";
+        //using url from firebase to get file
+        StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(pdfUrl);
+        ref.getBytes(MAX_BYTE_PDF)
+                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        //success
+                        Log.d(TAG, "onSuccess: "+pdfTitle+" success");
+
+                        //set to pdfview
+                        pdfView.fromBytes(bytes)
+                                .pages(0) //first page only
+                                .spacing(0)
+                                .swipeHorizontal(false)
+                                .enableSwipe(false)
+                                .onError(new OnErrorListener() {
+                                    @Override
+                                    public void onError(Throwable t) {
+
+                                        Log.d(TAG, "onError: "+t.getMessage());
+                                    }
+                                })
+                                .onPageError(new OnPageErrorListener() {
+                                    @Override
+                                    public void onPageError(int page, Throwable t) {
+
+                                        Log.d(TAG, "onPageError: "+t.getMessage());
+                                    }
+                                })
+                                .onLoad(new OnLoadCompleteListener() {
+                                    @Override
+                                    public void loadComplete(int nbPages) {
+
+                                        //pdf load
+                                        Log.d(TAG, "loadComplete: pdf load");
+                                    }
+                                })
+                                .load();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //fail
+                        Log.d(TAG, "onFailure: fail "+e.getMessage());
+                    }
+                });
+
+    }
+
     public static void loadPdfFromUrlSinglePage(String pdfUrl, String pdfTitle, PDFView pdfView, ProgressBar progressBar) {
 
         //add tag
@@ -255,6 +311,57 @@ public class MyApplication extends Application {
 
                     }
                 });
+    }
+
+    public static void loadFirstPage(String pdfUrl, PDFView pdfView) {
+
+        //add tag
+        String TAG = "PDF_FROM_URL_TAG";
+        //using url from firebase to get file
+        StorageReference ref = FirebaseStorage.getInstance().getReferenceFromUrl(pdfUrl);
+        ref.getBytes(MAX_BYTE_PDF)
+                .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                    @Override
+                    public void onSuccess(byte[] bytes) {
+                        //set to pdfview if success
+                        pdfView.fromBytes(bytes)
+                                .pages(0) //first page only
+                                .spacing(0)
+                                .swipeHorizontal(false)
+                                .enableSwipe(false)
+                                .onError(new OnErrorListener() {
+                                    @Override
+                                    public void onError(Throwable t) {
+
+                                        Log.d(TAG, "onError: "+t.getMessage());
+                                    }
+                                })
+                                .onPageError(new OnPageErrorListener() {
+                                    @Override
+                                    public void onPageError(int page, Throwable t) {
+
+                                        Log.d(TAG, "onPageError: "+t.getMessage());
+                                    }
+                                })
+                                .onLoad(new OnLoadCompleteListener() {
+                                    @Override
+                                    public void loadComplete(int nbPages) {
+
+                                        //pdf load
+                                        Log.d(TAG, "loadComplete: pdf load");
+                                    }
+                                })
+                                .load();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //fail
+                        Log.d(TAG, "onFailure: fail "+e.getMessage());
+                    }
+                });
+
     }
 
 }

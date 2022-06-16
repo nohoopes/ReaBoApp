@@ -19,6 +19,7 @@ import com.google.android.material.navigation.NavigationView;
 import id19110100.hcmute.edu.reaboadmin.Fragment.FavoriteFragment;
 import id19110100.hcmute.edu.reaboadmin.Fragment.HistoryFragment;
 import id19110100.hcmute.edu.reaboadmin.Fragment.HomeFragment;
+import id19110100.hcmute.edu.reaboadmin.Fragment.LibraryFragment;
 import id19110100.hcmute.edu.reaboadmin.Fragment.MyProfileFragment;
 import id19110100.hcmute.edu.reaboadmin.databinding.NavBarBinding;
 
@@ -95,6 +96,15 @@ public class NavigationBar extends AppCompatActivity implements NavigationView.O
             }
         }
 
+        else if(id==R.id.nav_shopping_cart)
+        {
+            if(currentFragment!=CART_FRAGMENT)
+            {
+                replaceFragment(new LibraryFragment());
+                currentFragment=CART_FRAGMENT;
+            }
+        }
+
         else if(id==R.id.nav_my_profile)
         {
             if(currentFragment!=MY_PROFILE_FRAGMENT)
@@ -103,6 +113,7 @@ public class NavigationBar extends AppCompatActivity implements NavigationView.O
                 currentFragment=MY_PROFILE_FRAGMENT;
             }
         }
+
         else if(id==R.id.nav_logout)
         {
 

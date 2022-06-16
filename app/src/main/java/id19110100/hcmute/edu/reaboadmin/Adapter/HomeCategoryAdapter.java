@@ -2,6 +2,8 @@ package id19110100.hcmute.edu.reaboadmin.Adapter;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +11,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import id19110100.hcmute.edu.reaboadmin.Model.Category;
+import id19110100.hcmute.edu.reaboadmin.Model.ModelPdf;
+import id19110100.hcmute.edu.reaboadmin.PdfListAdminActivity;
 import id19110100.hcmute.edu.reaboadmin.R;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import id19110100.hcmute.edu.reaboadmin.Model.Product;
 
@@ -23,6 +35,9 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
     private HomeFilterProduct homeFilterProduct;
     private Activity homeActivity;
     private ArrayList<Category> homeCategories;
+    private ArrayList<ModelPdf> pdfArrayList;
+    private static final String TAG = "PDF_LIST_TAG";
+    private AdapterPdfAdmin adapterPdfAdmin;
 
 
 
@@ -55,13 +70,8 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
         holder.imgCategory.setImageResource(category.getResourceId());
         holder.nameCategory.setText(category.getName());
         if(checked) {
-            ArrayList<Product> products = new ArrayList<>();
-            //products = getProductbyCate("Cake");
-            products.add(new Product(1, "The old man and the sea", 50000,R.drawable.hot_deal_imh,""));
-            products.add(new Product(1, "The old man and the sea", 50000,R.drawable.hot_deal_imh,""));
-            products.add(new Product(1, "The old man and the sea", 50000,R.drawable.hot_deal_imh,""));
-
-            homeFilterProduct.callBack(position, products);
+            loadPdfListByHotdeal(position);
+            //homeFilterProduct.callBack(position, products);
             checked = false;
         }
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -71,63 +81,33 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
                 notifyDataSetChanged();
                 if(row_index==0)
                 {
-                    ArrayList<Product> products =new ArrayList<>();
-                    //products = getProductbyCate("Cake");
-
-                    products.add(new Product(1, "The Old Man And The Sea", 50000,R.drawable.hot_deal_imh,""));
-                    products.add(new Product(1, "The Old Man And The Sea", 50000,R.drawable.hot_deal_imh,""));
-                    products.add(new Product(1, "The Old Man And The Sea", 50000,R.drawable.hot_deal_imh,""));
-
-                    homeFilterProduct.callBack(row_index, products);
+                    loadPdfListByHotdeal(row_index);
+                    //homeFilterProduct.callBack(row_index, products);
                 }
                 else if(row_index==1)
                 {
-                    ArrayList<Product> products =new ArrayList<>();
-                    //products = getProductbyCate("Frozen Dessert");
-
-                    products.add(new Product(1,"The Prophet",50000,R.drawable.rank_img,""));
-                    products.add(new Product(2,"The Prophet",60000,R.drawable.rank_img,""));
-                    products.add(new Product(3,"The Prophet",70000,R.drawable.rank_img,""));
-                    products.add(new Product(4,"The Prophet",80000,R.drawable.rank_img,""));
-
-                    homeFilterProduct.callBack(row_index, products);
+                    loadPdfListByRanking(row_index);
+                    //homeFilterProduct.callBack(row_index, products);
 
                 }
                 else if(row_index==2)
                 {
-                    ArrayList<Product> products =new ArrayList<>();
-                    // products = getProductbyCate("Dessert Soup");
+                    loadPdfListByNewBook(row_index);
 
-                    products.add(new Product(1,"The Danish Girl",50000,R.drawable.new_img,""));
-                    products.add(new Product(2,"The Danish Girl",60000,R.drawable.new_img,""));
-
-
-                    homeFilterProduct.callBack(row_index, products);
+                    //homeFilterProduct.callBack(row_index, products);
 
                 }
                 else if(row_index==3)
                 {
-                    ArrayList<Product> products =new ArrayList<>();
-                    //products = getProductbyCate("Drink");
-
-                    products.add(new Product(1,"Thien That Ra Khong Kho",50000,R.drawable.zen_img,""));
-
-                    homeFilterProduct.callBack(row_index, products);
+                    loadPdfListByZenCat(row_index);
+                    //homeFilterProduct.callBack(row_index, products);
 
                 }
                 else if(row_index==4)
                 {
-                    ArrayList<Product> products =new ArrayList<>();
-                    //products = getProductbyCate("Custard");
 
-                    products.add(new Product(1,"Doi Tho",50000,R.drawable.learning_img,""));
-                    products.add(new Product(1,"Doi Tho",50000,R.drawable.learning_img,""));
-                    products.add(new Product(1,"Doi Tho",50000,R.drawable.learning_img,""));
-                    products.add(new Product(1,"Doi Tho",50000,R.drawable.learning_img,""));
-                    products.add(new Product(1,"Doi Tho",50000,R.drawable.learning_img,""));
-
-
-                    homeFilterProduct.callBack(row_index, products);
+                    loadPdfListByAcaCat(row_index);
+                    //homeFilterProduct.callBack(row_index, products);
 
                 }
             }
@@ -174,4 +154,260 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
             cardView=itemView.findViewById(R.id.item_category_cv);
         }
     }
+
+    private void loadPdfList(int position) {
+        //init
+        pdfArrayList = new ArrayList<>();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books");
+        ref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        pdfArrayList.clear();
+                        for(DataSnapshot ds: snapshot.getChildren()){
+                            //get data
+                            ModelPdf model = ds.getValue(ModelPdf.class);
+                            //add to list
+                            pdfArrayList.add(model);
+
+                            Log.d(TAG, "onDataChange: "+model.getId()+" "+model.getTitle());
+                        }
+                        homeFilterProduct.callBack(position, pdfArrayList);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+
+    public ArrayList<ModelPdf> gethotdeal(ArrayList<ModelPdf> listBooks){
+        ArrayList<ModelPdf> return_data = new ArrayList<>();
+        if(listBooks.size() >= 5){
+            for (int i=0;i<5;i++){
+                return_data.add(listBooks.get(i));
+            }
+        }
+        else{
+            for (int i=0;i<listBooks.size();i++){
+                return_data.add(listBooks.get(i));
+            }
+        }
+        return return_data;
+    }
+
+    private void loadPdfListByHotdeal(int position) {
+        //init
+        pdfArrayList = new ArrayList<>();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                pdfArrayList.clear();
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    //get data
+                    ModelPdf model = ds.getValue(ModelPdf.class);
+                    //add to list
+                    pdfArrayList.add(model);
+
+                    Log.d(TAG, "onDataChange: "+model.getId()+" "+model.getTitle());
+                }
+
+                ArrayList<ModelPdf> hotdeals = gethotdeal(pdfArrayList);
+
+                homeFilterProduct.callBack(position, hotdeals);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private ArrayList<ModelPdf> getRanking (ArrayList<ModelPdf> listBooks){
+        ArrayList<ModelPdf> return_data = new ArrayList<>();
+        ArrayList<ModelPdf> list_search_book = listBooks;
+        Collections.sort(list_search_book, new Comparator<ModelPdf>(){
+            public int compare(ModelPdf e1, ModelPdf e2){
+                return e2.getViewCount() - (e1.getViewCount());
+            }
+        });
+        //System.out.println(listBooks);
+
+        if(list_search_book.size() >= 5){
+            for (int i=0;i<5;i++){
+                return_data.add(list_search_book.get(i));
+            }
+        }
+        else{
+            for (int i=0;i<list_search_book.size();i++){
+                return_data.add(list_search_book.get(i));
+            }
+        }
+        return return_data;
+    }
+
+
+    private void loadPdfListByRanking(int position) {
+        //init
+        pdfArrayList = new ArrayList<>();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                pdfArrayList.clear();
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    //get data
+                    ModelPdf model = ds.getValue(ModelPdf.class);
+                    //add to list
+                    pdfArrayList.add(model);
+
+                    Log.d(TAG, "onDataChange: "+model.getId()+" "+model.getTitle());
+                }
+
+                ArrayList<ModelPdf> hotdeals = getRanking(pdfArrayList);
+
+                homeFilterProduct.callBack(position, hotdeals);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private ArrayList<ModelPdf> getnewbook(ArrayList<ModelPdf> listBooks){
+        ArrayList<ModelPdf> return_data = new ArrayList<>();
+        if(listBooks.size() >= 5){
+            int count=0;
+            for (int i=listBooks.size()-1;count<5;i--){
+                return_data.add(listBooks.get(i));
+                count +=1;
+            }
+        }
+        else{
+            for (int i=0;i<listBooks.size();i++){
+                return_data.add(listBooks.get(i));
+            }
+        }
+        return return_data;
+    }
+
+
+    private void loadPdfListByNewBook(int position) {
+        //init
+        pdfArrayList = new ArrayList<>();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                pdfArrayList.clear();
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    //get data
+                    ModelPdf model = ds.getValue(ModelPdf.class);
+                    //add to list
+                    pdfArrayList.add(model);
+
+                    Log.d(TAG, "onDataChange: "+model.getId()+" "+model.getTitle());
+                }
+
+                ArrayList<ModelPdf> hotdeals = getnewbook(pdfArrayList);
+
+                homeFilterProduct.callBack(position, hotdeals);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    public ArrayList<ModelPdf> getModelPDFbyCateID(ArrayList<ModelPdf> booklist,String id){
+        ArrayList<ModelPdf> return_array= new ArrayList<>();
+        int count =0;
+        for (int i=0;i< booklist.size()&&count<5;i++){
+            if (booklist.get(i).getCategoryId().equals(id)){
+                return_array.add(booklist.get(i));
+                count+=1;
+            }
+        }
+        return return_array;
+    }
+
+    private void loadPdfListByZenCat(int position) {
+        //init
+        pdfArrayList = new ArrayList<>();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                pdfArrayList.clear();
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    //get data
+                    ModelPdf model = ds.getValue(ModelPdf.class);
+                    //add to list
+                    pdfArrayList.add(model);
+
+                    Log.d(TAG, "onDataChange: "+model.getId()+" "+model.getTitle());
+                }
+
+                ArrayList<ModelPdf> hotdeals = getModelPDFbyCateID(pdfArrayList,"1655351811971");
+
+                homeFilterProduct.callBack(position, hotdeals);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void loadPdfListByAcaCat(int position) {
+        //init
+        pdfArrayList = new ArrayList<>();
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books");
+        ref.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                pdfArrayList.clear();
+                for(DataSnapshot ds: snapshot.getChildren()){
+                    //get data
+                    ModelPdf model = ds.getValue(ModelPdf.class);
+                    //add to list
+                    pdfArrayList.add(model);
+
+                    Log.d(TAG, "onDataChange: "+model.getId()+" "+model.getTitle());
+                }
+
+                ArrayList<ModelPdf> hotdeals = getModelPDFbyCateID(pdfArrayList,"1655351752788");
+
+                homeFilterProduct.callBack(position, hotdeals);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
 }
