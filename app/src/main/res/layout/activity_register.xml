@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/sign_in_up_bg"
+    android:background="@drawable/sign_in_bg"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
@@ -21,11 +21,11 @@
 
         <ImageView
             android:id="@+id/iconIv"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="36dp"
-            android:src="@drawable/reabo_logo2" />
+            android:layout_marginTop="50dp"
+            android:src="@drawable/reabo_logo" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -145,13 +145,13 @@
             <!--Login Button-->
             <Button
                 android:id="@+id/registerBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/confirmpasswordTil"
                 android:layout_marginTop="20dp"
+                android:backgroundTint="@color/white"
                 android:text="Register"
-                android:backgroundTint="#25065A"
-                android:textColor="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:textColor="@color/dark_mallard" />
 
         </RelativeLayout>
 

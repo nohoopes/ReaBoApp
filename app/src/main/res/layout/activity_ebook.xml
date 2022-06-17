@@ -7,8 +7,32 @@
     tools:context=".EbookActivity"
     tools:ignore="MissingClass"
     android:background="@color/black">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:background="@drawable/ebook_bg"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        >
 
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_name_ebook"
+        android:text="Name of the book"
+        android:fontFamily="@font/intrepid"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:textColor="@color/white"
+        android:layout_marginTop="80dp"
+        android:textSize="30dp"></TextView>
     <ImageButton
+
         android:id="@+id/btn_back_ebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,14 +45,16 @@
         android:src="@drawable/ic_back_white" />
 
     <com.github.barteksc.pdfviewer.PDFView
+
         android:id="@+id/img_track"
-        android:layout_width="280dp"
+        android:layout_width="290dp"
         android:layout_height="240dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="180dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
+
 
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/pvControllerBar"
@@ -48,6 +74,7 @@
 
 
     </com.google.android.exoplayer2.ui.PlayerView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
