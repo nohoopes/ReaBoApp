@@ -28,8 +28,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,16 +69,26 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
         holder.nameProduct.setText(library.getBooks().getTitle());
 
         MyApplication.loadFirstPage(library.getBooks().getUrl(), holder.imgProduct);
+
         holder.btnReadnow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*uploadHistoryToDb(library, System.currentTimeMillis());
+                uploadHistoryToDb(library, System.currentTimeMillis());
                 Intent intent1 = new Intent(context, PdfViewActivity.class);
                 intent1.putExtra("bookId", library.getBooks().getId());
-                context.startActivity(intent1);*/
+                context.startActivity(intent1);
 
+
+            }
+        });
+
+        checkAudio(library, holder);
+
+        holder.btnListennow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Intent intent1 = new Intent(context, EbookActivity.class);
-                //intent1.putExtra("bookId", library.getBooks().getId());
+                intent1.putExtra("bookId", library.getBooks().getId());
                 context.startActivity(intent1);
             }
         });
@@ -117,15 +130,33 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
 
     public class LibraryViewHolder extends RecyclerView.ViewHolder{
         private PDFView imgProduct;
-        private TextView nameProduct, btnReadnow;
+        private TextView nameProduct, btnReadnow, btnListennow;
 
         public LibraryViewHolder(@NonNull View itemView) {
             super(itemView);
             imgProduct=itemView.findViewById(R.id.library_book_img);
             nameProduct=itemView.findViewById(R.id.library_book_name);
             btnReadnow=itemView.findViewById(R.id.btn_library_read_now);
+            btnListennow=itemView.findViewById(R.id.btn_library_listen_now);
         }
     }
 
+    private void checkAudio(Library library, LibraryViewHolder holder) {
 
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books");
+        ref.child(library.getBooks().getId()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                String audiobookurl ="" + snapshot.child("audiobookurl").getValue();
+                if (audiobookurl.equals("null")) {
+                    holder.btnListennow.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 }

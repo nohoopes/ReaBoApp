@@ -31,6 +31,10 @@
                 android:text="Name of the book"
                 android:fontFamily="@font/intrepid"
                 android:textSize="15dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
             <TextView
                 android:id="@+id/btn_library_read_now"
                 android:padding="5dp"
@@ -41,6 +45,18 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/intrepid"
                 android:text="Read now"/>
+
+            <TextView
+                android:id="@+id/btn_library_listen_now"
+                android:padding="5dp"
+                android:background="@color/white"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/intrepid"
+                android:text="Listen now"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
