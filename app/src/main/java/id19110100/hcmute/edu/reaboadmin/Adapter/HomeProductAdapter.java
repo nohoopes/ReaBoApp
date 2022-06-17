@@ -98,6 +98,8 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
                 String uid = firebaseAuth.getUid();
                 MyApplication.checkFavorite(uid,product,favoriteBtn,context ,uid,bottomSheetDialog);
                 TextView btnback = sheetView.findViewById(R.id.btn_back);
+                TextView cateBook = sheetView.findViewById(R.id.txt_cateBook);
+                MyApplication.loadCategory(categoryId,cateBook);
                 btnback.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

@@ -7,6 +7,7 @@ import id19110100.hcmute.edu.reaboadmin.Adapter.HomeCategoryAdapter;
 import id19110100.hcmute.edu.reaboadmin.Adapter.HomeFilterProduct;
 import id19110100.hcmute.edu.reaboadmin.Adapter.HomeProductAdapter;
 import id19110100.hcmute.edu.reaboadmin.Class.MyApplication;
+import id19110100.hcmute.edu.reaboadmin.FindingBookActivity;
 import id19110100.hcmute.edu.reaboadmin.Model.Banner;
 import id19110100.hcmute.edu.reaboadmin.Model.Category;
 import id19110100.hcmute.edu.reaboadmin.Model.ModelCategoryAd;
@@ -15,6 +16,7 @@ import  id19110100.hcmute.edu.reaboadmin.R;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -128,6 +130,11 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
             public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
                 if(i== EditorInfo.IME_ACTION_DONE)
                 {
+                    Intent intent = new Intent (context, FindingBookActivity.class);
+                    String name = searchRestaurantText.getText().toString();
+                    intent.putExtra("name_search",name);
+                    startActivity(intent);
+
                     return true;
                 }
                 else {

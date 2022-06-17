@@ -3,15 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/activity_category_add.xml" value="0.1403985507246377" />
         <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/activity_ebook.xml" value="0.1" />
+        <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/activity_finding_book.xml" value="0.1" />
         <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/activity_pdf_add.xml" value="0.1403985507246377" />
+        <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/activity_pdf_detail.xml" value="0.1403985507246377" />
+        <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/activity_pdf_edit.xml" value="0.1403985507246377" />
+        <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/activity_pdf_list_admin.xml" value="0.1" />
+        <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/activity_pdf_view.xml" value="0.1403985507246377" />
         <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/activity_register.xml" value="0.10106382978723404" />
         <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/activity_splash.xml" value="0.11367753623188406" />
+        <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/ad_row_category.xml" value="0.1403985507246377" />
+        <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/ebook_controller.xml" value="0.1403985507246377" />
         <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/favorite_book_item.xml" value="0.1" />
         <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/fragment_home.xml" value="0.12454710144927536" />
         <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/home_product.xml" value="0.10280797101449275" />
         <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/home_product_bottom_layout.xml" value="0.10280797101449275" />
         <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/item_book.xml" value="0.12360688956433637" />
+        <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/row_pdf_admin.xml" value="0.1403985507246377" />
+        <entry key="..\:/HK1/Mobile App/ReaBoApp/app/src/main/res/layout/row_pdf_user.xml" value="0.1" />
         <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/drawable-v24/btn_confirm_order.xml" value="0.1415" />
         <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/drawable/bg_change.xml" value="0.143" />
         <entry key="..\:/workspace/mobile/ReaBoAdmin/app/src/main/res/drawable/bg_image_slider_indicator.xml" value="0.143" />

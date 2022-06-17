@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
         <activity
+            android:name=".FindingBookActivity"
+            android:exported="false" />
+        <activity
             android:name=".EbookActivity"
             android:exported="false" />
         <activity

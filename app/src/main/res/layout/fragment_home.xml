@@ -27,7 +27,7 @@
             android:padding="10dp"
             android:textColorHint="#5A5757"
             android:textSize="20dp"
-            android:textColor="@color/pink_500"
+            android:textColor="@color/dark_mallard"
             app:layout_constraintBottom_toTopOf="@id/home_view_pager_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.2"

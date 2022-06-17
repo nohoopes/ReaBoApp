@@ -36,7 +36,6 @@
             android:id="@+id/titleTv"
             style="@style/TextAppearance.MaterialComponents.Headline6"
             android:text="Book Title"
-            android:layout_toStartOf="@id/moreBtn"
             android:layout_toEndOf="@id/pdfRl"
             android:maxLines="1"
             android:layout_width="match_parent"
@@ -101,14 +100,6 @@
             android:layout_height="wrap_content"/>
 
         <!--show more-->
-        <ImageButton
-            android:id="@+id/moreBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:background="@android:color/transparent"
-            android:padding="5dp"
-            android:src="@drawable/ic_more_black" />
 
     </RelativeLayout>
 
