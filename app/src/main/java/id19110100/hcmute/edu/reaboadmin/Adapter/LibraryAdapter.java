@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import id19110100.hcmute.edu.reaboadmin.Class.MyApplication;
+import id19110100.hcmute.edu.reaboadmin.EbookActivity;
 import id19110100.hcmute.edu.reaboadmin.Model.Library;
 import id19110100.hcmute.edu.reaboadmin.PdfAddActivity;
 import id19110100.hcmute.edu.reaboadmin.PdfDetailActivity;
@@ -68,9 +69,13 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
         holder.btnReadnow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadHistoryToDb(library, System.currentTimeMillis());
+                /*uploadHistoryToDb(library, System.currentTimeMillis());
                 Intent intent1 = new Intent(context, PdfViewActivity.class);
                 intent1.putExtra("bookId", library.getBooks().getId());
+                context.startActivity(intent1);*/
+
+                Intent intent1 = new Intent(context, EbookActivity.class);
+                //intent1.putExtra("bookId", library.getBooks().getId());
                 context.startActivity(intent1);
             }
         });

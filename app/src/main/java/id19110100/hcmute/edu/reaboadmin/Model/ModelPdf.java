@@ -2,7 +2,7 @@ package id19110100.hcmute.edu.reaboadmin.Model;
 
 public class ModelPdf {
     //variables
-    String uid, id, title, description, categoryId, license, url;
+    String uid, id, title, description, categoryId, license, url, ebookurl;
     long timestamp;
     int viewCount, downloadCount;
 
@@ -104,5 +104,13 @@ public class ModelPdf {
 
     public void setDownloadCount(int downloadCount) {
         this.downloadCount = downloadCount;
+    }
+
+    public String getEbookurl() {
+        return ebookurl;
+    }
+
+    public void setEbookurl(String ebookurl) {
+        this.ebookurl = ebookurl;
     }
 }
