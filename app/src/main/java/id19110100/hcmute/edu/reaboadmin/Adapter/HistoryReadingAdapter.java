@@ -18,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.barteksc.pdfviewer.PDFView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -58,6 +60,14 @@ public class HistoryReadingAdapter extends  RecyclerView.Adapter<HistoryReadingA
             }
         });
         MyApplication.loadFirstPage(history.getBooks().getUrl(), holder.imgHistory);
+
+        holder.btnDeleteHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("History");
+                ref.child(history.getId()).removeValue();
+            }
+        });
     }
 
     @Override
@@ -70,7 +80,7 @@ public class HistoryReadingAdapter extends  RecyclerView.Adapter<HistoryReadingA
     }
 
     public class HistoryOrderViewHolder extends RecyclerView.ViewHolder{
-        private final TextView nameHistory, timeHistory, btnReadHistory;
+        private final TextView nameHistory, timeHistory, btnReadHistory, btnDeleteHistory;
         private final PDFView imgHistory;
         public HistoryOrderViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -78,6 +88,7 @@ public class HistoryReadingAdapter extends  RecyclerView.Adapter<HistoryReadingA
             timeHistory=itemView.findViewById(R.id.history_book_time);
             btnReadHistory=itemView.findViewById(R.id.btn_history_read_cont);
             imgHistory=itemView.findViewById(R.id.history_book_img);
+            btnDeleteHistory=itemView.findViewById(R.id.btn_history_delete);
         }
     }
 }
