@@ -13,7 +13,7 @@
     <string name="navigation_drawer_open">Open Navigation Drawer</string>
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
 
-    <string name="search_box_hint">Search your restaurant</string>
+    <string name="search_box_hint">Search your book</string>
 
     <string name="home_product_bottom_title">DETAILS</string>
     <string name="product_name">Product Name</string>
