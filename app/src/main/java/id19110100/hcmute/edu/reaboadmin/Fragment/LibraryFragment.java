@@ -57,8 +57,9 @@ public class LibraryFragment extends Fragment {
         return view;
     }
 
+    //load all pdf from library table
     private void loadLibrary() {
-
+        //get uid
         String uid = firebaseAuth.getUid();
         //init arraylist
         libraries = new ArrayList<>();
@@ -77,7 +78,7 @@ public class LibraryFragment extends Fragment {
                     libraries.add(library);
                 }
 
-                Classify(libraries);
+                Classify(libraries); //classify to many list view by name
             }
 
             @Override
@@ -89,17 +90,20 @@ public class LibraryFragment extends Fragment {
     }
 
     //Classify to recyclerview
+    //Main idea is that loop through all libraries and check the first char in tittle belong to which collection,
+    // then create adapter for each collection and add to recycler view
     private void Classify(ArrayList<Library> libraries) {
-        /*Main idea is that loop through all libraries and check the first char in tittle belong to which collection,
-        then create adapter for each collection and add to recycler view*/
+
         List<LibraryAdapter> adapterList = new ArrayList<>();
         ArrayList<ArrayList<Library>> arrayLists = new ArrayList<ArrayList<Library>> ();
 
+        //init all arraylist library in arraylist
         for(Integer i = 0; i < 27; i ++) {
             ArrayList<Library> list = new ArrayList<>();
             arrayLists.add(list);
         }
 
+        //check first character of each book title and classify it
         for (Library library : libraries) {
             char firstChar = library.getBooks().getTitle().charAt(0);
             switch (firstChar) {
@@ -239,12 +243,12 @@ public class LibraryFragment extends Fragment {
                 }
             }
         }
-
+        //after classify create adapter with each list
         for (ArrayList arrayList : arrayLists) {
             LibraryAdapter adapter = new LibraryAdapter(LibraryFragment.this.getActivity(), arrayList);
             adapterList.add(adapter);
         }
-
+        //put adapter to recyclerview from list by sequence
         for (Integer i = 0; i < adapterList.size(); i ++) {
             recyclerViews.get(i).setAdapter(adapterList.get(i));
             recyclerViews.get(i).setLayoutManager(new LinearLayoutManager(LibraryFragment.this.getActivity(), RecyclerView.VERTICAL, false));
@@ -310,26 +314,5 @@ public class LibraryFragment extends Fragment {
         recyclerViews.add(rvZ);
         rvOther = (RecyclerView) view.findViewById(R.id.Other_category_listview);
         recyclerViews.add(rvOther);
-    }
-
-    private void emain() {
-        ArrayList<ArrayList<Integer>> testarray = new ArrayList<ArrayList<Integer>> ();
-
-        for (Integer i = 0; i < 3; i ++) {
-            ArrayList<Integer> arrayList = new ArrayList<>();
-            testarray.add(arrayList);
-        }
-
-        for(Integer i = 0; i < 10; i ++) {
-            if (i%2==0) {
-                if (testarray.isEmpty()) {
-                    ArrayList<Integer> arrayList = new ArrayList<>();
-                    testarray.get(1).add(i);
-                }
-            }
-        }
-        for (ArrayList<Integer> i : testarray) {
-            System.out.print(i);
-        }
     }
 }

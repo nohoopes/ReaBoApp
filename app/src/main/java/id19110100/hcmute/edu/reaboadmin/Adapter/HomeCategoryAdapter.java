@@ -32,20 +32,18 @@ import java.util.Comparator;
 import id19110100.hcmute.edu.reaboadmin.Model.Product;
 
 public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapter.HomeCategoryViewHolder> {
+    //Variables
     private HomeFilterProduct homeFilterProduct;
     private Activity homeActivity;
     private ArrayList<Category> homeCategories;
     private ArrayList<ModelPdf> pdfArrayList;
     private static final String TAG = "PDF_LIST_TAG";
-    private AdapterPdfAdmin adapterPdfAdmin;
-
-
-
 
     private boolean checked=true;
     private boolean selected=true;
     private int row_index=-1;
 
+    //Constructor
     public HomeCategoryAdapter(HomeFilterProduct homeFilterProduct, Activity homeActivity, ArrayList<Category> homeCategories) {
         this.homeFilterProduct = homeFilterProduct;
         this.homeActivity = homeActivity;
@@ -62,11 +60,13 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
 
     @Override
     public void onBindViewHolder(@NonNull HomeCategoryViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        //get category from categories by position
         Category category =homeCategories.get(position);
         if(category ==null)
         {
             return;
         }
+        //set data
         holder.imgCategory.setImageResource(category.getResourceId());
         holder.nameCategory.setText(category.getName());
         if(checked) {
@@ -74,6 +74,7 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
             //homeFilterProduct.callBack(position, products);
             checked = false;
         }
+        //click to view to load list books
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,6 +144,7 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
         return 0;
     }
 
+    //View holder of adapter
     public class HomeCategoryViewHolder extends RecyclerView.ViewHolder {
         private ImageView imgCategory;
         private TextView nameCategory;
@@ -155,35 +157,7 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
         }
     }
 
-    private void loadPdfList(int position) {
-        //init
-        pdfArrayList = new ArrayList<>();
-
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books");
-        ref.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        pdfArrayList.clear();
-                        for(DataSnapshot ds: snapshot.getChildren()){
-                            //get data
-                            ModelPdf model = ds.getValue(ModelPdf.class);
-                            //add to list
-                            pdfArrayList.add(model);
-
-                            Log.d(TAG, "onDataChange: "+model.getId()+" "+model.getTitle());
-                        }
-                        homeFilterProduct.callBack(position, pdfArrayList);
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-    }
-
-
+    //get "hot deal" category
     public ArrayList<ModelPdf> gethotdeal(ArrayList<ModelPdf> listBooks){
         ArrayList<ModelPdf> return_data = new ArrayList<>();
         if(listBooks.size() >= 5){
@@ -199,6 +173,7 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
         return return_data;
     }
 
+    //Load list of pdf by Hotdeal
     private void loadPdfListByHotdeal(int position) {
         //init
         pdfArrayList = new ArrayList<>();
@@ -230,6 +205,7 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
         });
     }
 
+    //get "ranking" category
     private ArrayList<ModelPdf> getRanking (ArrayList<ModelPdf> listBooks){
         ArrayList<ModelPdf> return_data = new ArrayList<>();
         ArrayList<ModelPdf> list_search_book = listBooks;
@@ -253,7 +229,7 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
         return return_data;
     }
 
-
+    //Load list of pdf by Ranking
     private void loadPdfListByRanking(int position) {
         //init
         pdfArrayList = new ArrayList<>();
@@ -285,6 +261,7 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
         });
     }
 
+    //Get new book
     private ArrayList<ModelPdf> getnewbook(ArrayList<ModelPdf> listBooks){
         ArrayList<ModelPdf> return_data = new ArrayList<>();
         if(listBooks.size() >= 5){
@@ -302,7 +279,7 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
         return return_data;
     }
 
-
+    //load new books
     private void loadPdfListByNewBook(int position) {
         //init
         pdfArrayList = new ArrayList<>();
@@ -334,7 +311,7 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
         });
     }
 
-
+    //get book by specific category id
     public ArrayList<ModelPdf> getModelPDFbyCateID(ArrayList<ModelPdf> booklist,String id){
         ArrayList<ModelPdf> return_array= new ArrayList<>();
         int count =0;
@@ -378,6 +355,7 @@ public class HomeCategoryAdapter extends  RecyclerView.Adapter<HomeCategoryAdapt
         });
     }
 
+    //load book by "Academic" category
     private void loadPdfListByAcaCat(int position) {
         //init
         pdfArrayList = new ArrayList<>();

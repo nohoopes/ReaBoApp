@@ -50,6 +50,7 @@ public class HistoryFragment extends Fragment {
         return history;
     }
 
+    //load all history books to listview
     private void loadHistory() {
 
         String uid = firebaseAuth.getUid();

@@ -30,6 +30,7 @@ public class HistoryReadingAdapter extends  RecyclerView.Adapter<HistoryReadingA
     private Context context;
     private final ArrayList<History> histories;
 
+    //Constructor
     public HistoryReadingAdapter(Context context, ArrayList<History> histories) {
         this.context = context;
         this.histories = histories;
@@ -79,6 +80,7 @@ public class HistoryReadingAdapter extends  RecyclerView.Adapter<HistoryReadingA
         return 0;
     }
 
+    //Viewholder of HistoryReadingAdapter
     public class HistoryOrderViewHolder extends RecyclerView.ViewHolder{
         private final TextView nameHistory, timeHistory, btnReadHistory, btnDeleteHistory;
         private final PDFView imgHistory;

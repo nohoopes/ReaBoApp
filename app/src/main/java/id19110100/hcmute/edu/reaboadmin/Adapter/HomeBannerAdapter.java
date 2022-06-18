@@ -15,10 +15,11 @@ import id19110100.hcmute.edu.reaboadmin.Model.Banner;
 
 public class HomeBannerAdapter extends RecyclerView.Adapter<HomeBannerAdapter.HomeCouponViewHolder>{
     private final List<Banner> bannerList;
+
+    //Constructor
     public HomeBannerAdapter(List<Banner> bannerList) {
         this.bannerList = bannerList;
     }
-
 
     @NonNull
     @Override
@@ -47,6 +48,7 @@ public class HomeBannerAdapter extends RecyclerView.Adapter<HomeBannerAdapter.Ho
         return 0;
     }
 
+    //View Holder of Adapter
     public static class HomeCouponViewHolder extends RecyclerView.ViewHolder{
         private final ImageView imgCoupon;
         public HomeCouponViewHolder(@NonNull View itemView) {

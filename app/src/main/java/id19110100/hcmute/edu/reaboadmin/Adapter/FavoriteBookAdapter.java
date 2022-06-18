@@ -34,8 +34,11 @@ public class FavoriteBookAdapter extends BaseAdapter {
     private Context context;
     private int layout;
     private ArrayList<Favorite> listFavorite;
+
+    //Init firebaseAuth
     private FirebaseAuth firebaseAuth;
 
+    //Constructor
     public FavoriteBookAdapter(Context context, int layout, ArrayList<Favorite> ListFavorite) {
         this.context = context;
         this.layout = layout;
@@ -60,6 +63,7 @@ public class FavoriteBookAdapter extends BaseAdapter {
         return 0;
     }
 
+    //Class view holder have these attributes
     private class ViewHolder {
         LinearLayout background;
         TextView name;
@@ -69,8 +73,11 @@ public class FavoriteBookAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
+        //Init firebaseAuth
         firebaseAuth = FirebaseAuth.getInstance();
+
         ViewHolder holder;
+        //Get favorite at one position
         Favorite my_favorite = listFavorite.get(i);
         if (view == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -80,36 +87,38 @@ public class FavoriteBookAdapter extends BaseAdapter {
         }
 
         holder = new ViewHolder();
-
+        //Mapping
         holder.background = (LinearLayout) view.findViewById(R.id.favorite_book_layout);
         holder.img = (PDFView) view.findViewById(R.id.favorite_book_img);
         MyApplication.loadPdfFromUrlSinglePageNoProgessbar(my_favorite.getBooks().getUrl(),my_favorite.getBooks().getTitle(), holder.img);
         holder.name = (TextView) view.findViewById(R.id.favorite_book_name);
         holder.name.setText(my_favorite.getBooks().getTitle());
         holder.btn_read =(TextView) view.findViewById(R.id.btn_favorite_read_now);
+
         holder.btn_read.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadHistoryToDb(my_favorite, System.currentTimeMillis());
-                Intent intent1 = new Intent(context, PdfViewActivity.class);
-                intent1.putExtra("bookId", my_favorite.getBooks().getId());
+                uploadHistoryToDb(my_favorite, System.currentTimeMillis()); //upload history to firebase
+                Intent intent1 = new Intent(context, PdfViewActivity.class); //redirect to PDFViewActivity to read the book
+                intent1.putExtra("bookId", my_favorite.getBooks().getId()); //put book to intent
                 context.startActivity(intent1);
             }
         });
         return view;
     }
 
+    //Upload to firebase History
     private void uploadHistoryToDb(Favorite favorite, Long timestamp) {
         String uid = firebaseAuth.getUid();
 
-        //set up data
+        //prepare data
         HashMap<String,Object> hashMap = new HashMap<>();
         hashMap.put("uid", ""+uid);
         hashMap.put("id", ""+timestamp);
         hashMap.put("Books", favorite.getBooks());
         hashMap.put("timestamp", timestamp);
 
-        //db ref
+        //db ref to upload data
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("History");
         ref.child(""+timestamp)
                 .setValue(hashMap)

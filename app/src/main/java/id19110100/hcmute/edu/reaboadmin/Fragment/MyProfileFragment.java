@@ -39,17 +39,18 @@ import id19110100.hcmute.edu.reaboadmin.R;
 import id19110100.hcmute.edu.reaboadmin.RegisterActivity;
 
 public class MyProfileFragment extends Fragment {
+    //variables
     private TextView fullNameTv;
     private EditText usernameEdit,passwordEdit,fullnameEdit,confirmpasswordEdit;
     private Button updateProfileBtn;
-
+    //firebase authentication
     private FirebaseAuth firebaseAuth;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View myProfile=inflater.inflate(R.layout.my_profile_fragment,container,false);
-        ////////mapping
+        // mapping
         fullNameTv=myProfile.findViewById(R.id.my_profile_full_name);
         usernameEdit=myProfile.findViewById(R.id.my_profile_email);
         passwordEdit=myProfile.findViewById(R.id.my_profile_password);
@@ -60,7 +61,8 @@ public class MyProfileFragment extends Fragment {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
-        loadUser();
+        loadUser(); //load user info to text views
+
         updateProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,6 +73,7 @@ public class MyProfileFragment extends Fragment {
         return myProfile;
     }
 
+    //load user info to text views
     private void loadUser() {
         //get all libraries from firebase
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
@@ -128,13 +131,16 @@ public class MyProfileFragment extends Fragment {
         }
     }
 
+    //change password
     private void updatePassword(String newPassword) {
+        //get user
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         user.updatePassword(newPassword)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
+                        //if update password successful then update userinfo if there are any changes
                         if (task.isSuccessful()) {
                             Toast.makeText(getActivity(), "Password updated successfully...", Toast.LENGTH_SHORT).show();
                             updateUserInfor();

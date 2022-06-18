@@ -47,6 +47,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
     //firebase auth
     private FirebaseAuth firebaseAuth;
 
+    //constructor
     public LibraryAdapter(Context context ,ArrayList<Library> libraries) {
         this.context = context;
         this.libraries = libraries;
@@ -62,38 +63,43 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
 
     @Override
     public void onBindViewHolder(@NonNull LibraryViewHolder holder, int position) {
+        //get library by position from list
         Library library = libraries.get(position);
         if (library == null){
             return;
         }
+        //set name
         holder.nameProduct.setText(library.getBooks().getTitle());
-
+        //load first page to img view
         MyApplication.loadFirstPage(library.getBooks().getUrl(), holder.imgProduct);
-
+        //button read now to open view activity
         holder.btnReadnow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                uploadHistoryToDb(library, System.currentTimeMillis());
-                Intent intent1 = new Intent(context, PdfViewActivity.class);
-                intent1.putExtra("bookId", library.getBooks().getId());
+                uploadHistoryToDb(library, System.currentTimeMillis()); //upload to history table
+                Intent intent1 = new Intent(context, PdfViewActivity.class); //intent to pdfview activity
+                intent1.putExtra("bookId", library.getBooks().getId()); //put book to extra
                 context.startActivity(intent1);
 
 
             }
         });
 
+        //check whether the book has audio book or not
         checkAudio(library, holder);
 
+        //button to redirect to audio book player activity
         holder.btnListennow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(context, EbookActivity.class);
-                intent1.putExtra("bookId", library.getBooks().getId());
+                Intent intent1 = new Intent(context, EbookActivity.class); //redirect to Ebook activity to listen audio books
+                intent1.putExtra("bookId", library.getBooks().getId()); //put extra bookid
                 context.startActivity(intent1);
             }
         });
     }
 
+    //upload history do firebase
     private void uploadHistoryToDb(Library library, Long timestamp) {
         String uid = firebaseAuth.getUid();
 
@@ -104,7 +110,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
         hashMap.put("Books", library.getBooks());
         hashMap.put("timestamp", timestamp);
 
-        //db ref
+        //db ref to upload to firebase
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("History");
         ref.child(""+timestamp)
                 .setValue(hashMap)
@@ -128,6 +134,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
         return 0;
     }
 
+    //View holder of adapter
     public class LibraryViewHolder extends RecyclerView.ViewHolder{
         private PDFView imgProduct;
         private TextView nameProduct, btnReadnow, btnListennow;
@@ -141,6 +148,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
         }
     }
 
+    //check the book have the audio version, if not hide the button listen now
     private void checkAudio(Library library, LibraryViewHolder holder) {
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books");
@@ -149,7 +157,7 @@ public class LibraryAdapter extends RecyclerView.Adapter<LibraryAdapter.LibraryV
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String audiobookurl ="" + snapshot.child("audiobookurl").getValue();
                 if (audiobookurl.equals("null")) {
-                    holder.btnListennow.setVisibility(View.GONE);
+                    holder.btnListennow.setVisibility(View.GONE); //hide button listennow
                 }
             }
 

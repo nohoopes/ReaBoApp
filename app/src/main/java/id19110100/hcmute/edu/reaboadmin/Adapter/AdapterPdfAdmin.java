@@ -126,6 +126,7 @@ public class AdapterPdfAdmin extends RecyclerView.Adapter<AdapterPdfAdmin.Holder
 
     }
 
+    //Show option edit or delete
     private void moreOptionsDialog(ModelPdf model, HolderPdfAdmin holder) {
         //options to show in dialog
         String[] options = {"Edit", "Delete"};

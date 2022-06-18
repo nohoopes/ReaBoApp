@@ -25,14 +25,13 @@ import id19110100.hcmute.edu.reaboadmin.Class.MyApplication;
 import id19110100.hcmute.edu.reaboadmin.Fragment.MyProfileFragment;
 
 public class EbookActivity extends AppCompatActivity {
-
+    //variables
     PlayerView pvEbookController;
     ExoPlayer player;
     ImageButton next, previous, back;
     PDFView imgPDF;
     TextView titleName;
 
-    //variables
     private String bookId;
 
     @Override
@@ -44,8 +43,12 @@ public class EbookActivity extends AppCompatActivity {
         Intent intent = getIntent();
         bookId = intent.getStringExtra("bookId");
 
+        //mapping
         next = findViewById(R.id.next);
         previous = findViewById(R.id.previous);
+        imgPDF = findViewById(R.id.img_pdf_audio_book);
+        titleName = findViewById(R.id.txt_name_ebook);
+        back = findViewById(R.id.btn_back_ebook);
 
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,10 +65,6 @@ public class EbookActivity extends AppCompatActivity {
             }
         });
 
-        imgPDF = findViewById(R.id.img_pdf_audio_book);
-        titleName = findViewById(R.id.txt_name_ebook);
-
-        back = findViewById(R.id.btn_back_ebook);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,12 +72,15 @@ public class EbookActivity extends AppCompatActivity {
             }
         });
 
-        loadBookView();
+        loadBookView(); //load firebase to do stuff
 
     }
-    private void loadBookView() {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books");
 
+    //load from firebase to take data to pdfview, textview and audio player
+    private void loadBookView() {
+
+        //database ref to load from firebase
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books");
         ref.child(bookId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -105,21 +107,27 @@ public class EbookActivity extends AppCompatActivity {
     }
 
 
-
+    //play media from url
     public void PlayMedia(String url)
     {
+        //ExoPlayer
         player = new ExoPlayer.Builder(this).build();
 
+        //mapping
         pvEbookController = findViewById(R.id.pvControllerBar);
 
+        //set player
         pvEbookController.setPlayer(player);
 
+        //get data from url
         Uri uriOfContentUrl = Uri.parse(url);
         MediaItem Item = MediaItem.fromUri(uriOfContentUrl);
 
+        //add to player
         player.addMediaItem(Item);
         player.prepare();
 
+        //play
         player.play();
         pvEbookController.setControllerShowTimeoutMs(0);
         pvEbookController.showController();
@@ -129,6 +137,6 @@ public class EbookActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        player.stop(true);
+        player.stop(true); //stop when exit activity
     }
 }

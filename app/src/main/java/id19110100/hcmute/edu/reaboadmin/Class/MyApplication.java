@@ -317,9 +317,8 @@ public class MyApplication extends Application {
                     }
                 });
     }
-
+    //load first page of pdf to show as an image
     public static void loadFirstPage(String pdfUrl, PDFView pdfView) {
-
         //add tag
         String TAG = "PDF_FROM_URL_TAG";
         //using url from firebase to get file
@@ -368,6 +367,7 @@ public class MyApplication extends Application {
                 });
 
     }
+    //if the book in favorite table already, change the heart image
     static Boolean return_data;
     public static void checkFavorite(String userID, ModelPdf book, TextView favoritebtn, Context context, String uid, BottomSheetDialog bottomsheet){
         return_data = false;
@@ -386,6 +386,7 @@ public class MyApplication extends Application {
                 }
                 final Favorite my_favorite_1= my_favorite;
                 if(return_data){
+                    //if the book is in the table already, remove it and change image heart
                     favoritebtn.setBackground(ContextCompat.getDrawable(context, R.drawable.heart_check));
                     favoritebtn.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -402,6 +403,7 @@ public class MyApplication extends Application {
 
                     });
                 }else{
+                    //if the book is not in the table already, add it and change image heart
                     favoritebtn.setBackground(ContextCompat.getDrawable(context, R.drawable.heart));
                     favoritebtn.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -419,7 +421,7 @@ public class MyApplication extends Application {
                             hashMap.put("id", ""+timestamp);
                             hashMap.put("Books", product);
 
-                            //db ref
+                            //ref to upload to firebase
                             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Favorite");
                             ref.child(""+timestamp)
                                     .setValue(hashMap)

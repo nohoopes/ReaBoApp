@@ -54,7 +54,7 @@ import me.relex.circleindicator.CircleIndicator3;
 
 
 public class HomeFragment extends Fragment implements HomeFilterProduct {
-    /////////////// best deal image slider
+    // best deal image slider
     private ViewPager2 homeViewPager;
     private CircleIndicator3 homeCircleIndicator;
     private List<Banner> banners;
@@ -73,11 +73,11 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
             }
         }
     };
-    /////////////// home category recycler view
+    // home category recycler view
     private RecyclerView homeHorRecyclerView;
     private HomeCategoryAdapter homeCategoryAdapter;
     private ArrayList<Category> homeCategories;
-    /////////////// home product recycler view
+    // home product recycler view
     private RecyclerView homeVerRecyclerView;
     private HomeProductAdapter homeProductAdapter;
     private ArrayList<ModelPdf> products;
@@ -87,14 +87,8 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
     RecyclerView home_cooking_recyclerview;
 
 
-    //// Testing get pdf
+    // Testing get pdf
     private ArrayList<ModelPdf> pdfArrayList;
-
-    //adapter
-    private AdapterPdfAdmin adapterPdfAdmin;
-
-    //view binding
-    private ActivityPdfListAdminBinding binding;
 
     //add TAG
     private static final String TAG = "PDF_LIST_TAG";
@@ -114,7 +108,7 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View home=inflater.inflate(R.layout.fragment_home,container,false);
-        //////////////// mapping
+        // mapping
         homeViewPager = home.findViewById(R.id.home_view_pager);
         homeCircleIndicator = home.findViewById(R.id.home_circle_indicator);
         homeHorRecyclerView =home.findViewById(R.id.home_hor_recycler_view);
@@ -143,7 +137,7 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
             }
         });
 
-        /////////////// banner slider
+        // banner slider
         homeViewPager.setOffscreenPageLimit(3);
         homeViewPager.setClipToPadding(false);
         homeViewPager.setClipChildren(false);
@@ -163,9 +157,9 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
 
             }
         });
-        ////////////// category recycler view
+        // category recycler view
         homeCategories=new ArrayList<>();
-
+        // init list of category
         homeCategories.add(new Category(R.drawable.hot_deal,"Hot Deal"));
         homeCategories.add(new Category(R.drawable.rank,"Ranking"));
         homeCategories.add(new Category(R.drawable.new_logo,"New Books"));
@@ -179,51 +173,22 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
 
         loadPdfList();
 
-
-
-
-
-
-
-        //List<Book> list= new ArrayList<>();
-
-        //list.add(new Book(1));
-        //list.add(new Book(1));
-        //list.add(new Book(1));
-        //list.add(new Book(1));
-        //list.add(new Book(1));
-        //list.add(new Book(1));
-        //list.add(new Book(1));
-
-        ////// products in Thien Dinh category
-        //////home_thiendinh_recyclerview.setAdapter(homeBookAdapter);
-        //////home_thiendinh_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
-        //////home_thiendinh_recyclerview.setHasFixedSize(true);
-        //////home_thiendinh_recyclerview.setNestedScrollingEnabled(false);
-        ////// products in Cookery category
-        //////home_cooking_recyclerview.setAdapter(homeBookAdapter);
-        //////home_cooking_recyclerview.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
-        //////home_cooking_recyclerview.setHasFixedSize(true);
-        //////home_cooking_recyclerview.setNestedScrollingEnabled(false);
-
         homeHorRecyclerView.setAdapter(homeCategoryAdapter);
         homeHorRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false));
         homeHorRecyclerView.setHasFixedSize(true);
         homeHorRecyclerView.setNestedScrollingEnabled(false);
 
-        ////////////// product recycler view
+        // product recycler view
         products =new ArrayList<>();
 
         homeProductAdapter=new HomeProductAdapter(getActivity(), products);
         homeVerRecyclerView.setAdapter(homeProductAdapter);
         homeVerRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false));
 
-
-
         return home;
     }
 
-    ///////////// Images for banner in homepage
+    // Images for banner in homepage
     private List<Banner> getBanners(){
         List<Banner> list=new ArrayList<>();
 
@@ -258,7 +223,7 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
         homeVerRecyclerView.setAdapter(homeProductAdapter);
     }
 
-
+    // load all pdf from database
     private void loadPdfList() {
         //init
         pdfArrayList = new ArrayList<>();
@@ -302,6 +267,7 @@ public class HomeFragment extends Fragment implements HomeFilterProduct {
                 });
     }
 
+    //get all book with id to new array
     public ArrayList<ModelPdf> getModelPDFbyCateID(ArrayList<ModelPdf> booklist,String id){
         ArrayList<ModelPdf> return_array= new ArrayList<>();
         for (int i=0;i< booklist.size();i++){

@@ -37,8 +37,11 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
     private BottomSheetDialog bottomSheetDialog;
     private Context context;
     private ArrayList<ModelPdf> products;
+
+    //variable firebaseAuth
     private FirebaseAuth firebaseAuth;
 
+    //Constructor
     public HomeProductAdapter(Context context, ArrayList<ModelPdf> products) {
         this.context = context;
         this.products = products;
@@ -54,12 +57,14 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
 
     @Override
     public void onBindViewHolder(@NonNull HomeProductViewHolder holder, int position) {
+        //get product from list at position
         ModelPdf product = products.get(position);
         if(product ==null)
         {
             return;
         }
 
+        //get data from product
         String pdfId = product.getId();
         String categoryId = product.getCategoryId();
         String pdfUrl = product.getUrl();
@@ -69,14 +74,15 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
         long timestamp = product.getTimestamp();
         int countview = product.getViewCount();
 
-
-
+        //load first page to imgview
         MyApplication.loadPdfFromUrlSinglePageNoProgessbar(
                 ""+pdfUrl,
                 ""+title,
                 holder.imgProduct);
+        //set data
         holder.nameProduct.setText(title);
         holder.priceProduct.setText(license);
+        //click to product to show bottom sheet
         holder.imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,35 +96,41 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
                         Toast.makeText(context,"Added to Library",Toast.LENGTH_SHORT).show();
                     }
                 });
+
+                //mapping
                 PDFView imgBottomProduct=sheetView.findViewById(R.id.home_product_bottom_img);
                 TextView nameBottomProduct=sheetView.findViewById(R.id.home_product_bottom_product_name);
                 TextView priceBottomProduct=sheetView.findViewById(R.id.home_product_bottom_product_price);
                 TextView descriptionBottomProduct=sheetView.findViewById(R.id.tx_book_description);
                 TextView favoriteBtn = sheetView.findViewById(R.id.txt_favorite);
-                String uid = firebaseAuth.getUid();
-                MyApplication.checkFavorite(uid,product,favoriteBtn,context ,uid,bottomSheetDialog);
                 TextView btnback = sheetView.findViewById(R.id.btn_back);
                 TextView cateBook = sheetView.findViewById(R.id.txt_cateBook);
+                //get uid
+                String uid = firebaseAuth.getUid();
+                //set favorite heart whether it is checked or not
+                MyApplication.checkFavorite(uid,product,favoriteBtn,context ,uid,bottomSheetDialog);
+                //load category name to textview
                 MyApplication.loadCategory(categoryId,cateBook);
+
+                //
                 btnback.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         bottomSheetDialog.dismiss();
                     }
                 });
+                //load first page to imgview
                 MyApplication.loadPdfFromUrlSinglePageNoProgessbar(
                         ""+pdfUrl,
                         ""+title,
                         imgBottomProduct);
-
+                //set data
                 nameBottomProduct.setText(title);
                 priceBottomProduct.setText(license);
                 descriptionBottomProduct.setText(description);
 
                 bottomSheetDialog.setContentView(sheetView);
                 bottomSheetDialog.show();
-
-
 
             }
         });
@@ -133,6 +145,7 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
         return 0;
     }
 
+    //View Holder of Adapter
     public class HomeProductViewHolder extends RecyclerView.ViewHolder{
         private PDFView imgProduct;
         private TextView nameProduct,priceProduct;
@@ -145,6 +158,7 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
         }
     }
 
+    //upload Library to firebase
     private void uploadLibraryToDb(ModelPdf product, Long timestamp) {
         String uid = firebaseAuth.getUid();
 
@@ -154,7 +168,7 @@ public class HomeProductAdapter extends  RecyclerView.Adapter<HomeProductAdapter
         hashMap.put("id", ""+timestamp);
         hashMap.put("Books", product);
 
-        //db ref
+        //db ref to upload to firebase
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Library");
         ref.child(""+timestamp)
                 .setValue(hashMap)

@@ -29,6 +29,7 @@ import id19110100.hcmute.edu.reaboadmin.PdfListAdminActivity;
 import id19110100.hcmute.edu.reaboadmin.databinding.AdRowCategoryBinding;
 
 public class AdapterCategoryAd extends RecyclerView.Adapter<AdapterCategoryAd.HolderCategory> implements Filterable {
+
     private Context context;
     public ArrayList<ModelCategoryAd> categoryAdArrayList, filterList;
 
@@ -38,6 +39,7 @@ public class AdapterCategoryAd extends RecyclerView.Adapter<AdapterCategoryAd.Ho
     //instance of filter class
     private FilterCategory filter;
 
+    //Constructor
     public AdapterCategoryAd(Context context, ArrayList<ModelCategoryAd> categoryAdArrayList) {
         this.context = context;
         this.categoryAdArrayList = categoryAdArrayList;
@@ -102,6 +104,7 @@ public class AdapterCategoryAd extends RecyclerView.Adapter<AdapterCategoryAd.Ho
 
     }
 
+    //Delete category by ModelCategoryAd
     private void deleteCategory(ModelCategoryAd model, HolderCategory holder) {
         //get id category
         String id = model.getId();

@@ -53,6 +53,7 @@ public class AdapterPdfUser extends RecyclerView.Adapter<AdapterPdfUser.HolderPd
     private static final String TAG = "PDF_ADAPTER_TAG";
     private FirebaseAuth firebaseAuth;
 
+    //constructor
     public AdapterPdfUser(Context context, ArrayList<ModelPdf> pdfArrayList) {
         this.context = context;
         this.pdfArrayList = pdfArrayList;
@@ -115,13 +116,15 @@ public class AdapterPdfUser extends RecyclerView.Adapter<AdapterPdfUser.HolderPd
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 bottomSheetDialog=new BottomSheetDialog(context, R.style.BottomSheetTheme);
                 View sheetView=LayoutInflater.from(context).inflate(R.layout.home_product_bottom_layout,null);
                 Activity a = (Activity) context;
+                //Mapping
                 sheetView.findViewById(R.id.btn_add_to_library).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        uploadLibraryToDb(model, System.currentTimeMillis());
+                        uploadLibraryToDb(model, System.currentTimeMillis()); //upload library to database
                         Toast.makeText(context,"Added to Library",Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -131,6 +134,7 @@ public class AdapterPdfUser extends RecyclerView.Adapter<AdapterPdfUser.HolderPd
                 TextView descriptionBottomProduct=sheetView.findViewById(R.id.tx_book_description);
                 TextView favoriteBtn = sheetView.findViewById(R.id.txt_favorite);
                 TextView cateBook = sheetView.findViewById(R.id.txt_cateBook);
+                //Change infomation
                 MyApplication.loadCategory(categoryId,cateBook);
                 String uid = firebaseAuth.getUid();
                 MyApplication.checkFavorite(uid,model,favoriteBtn,context ,uid,bottomSheetDialog);
@@ -195,16 +199,18 @@ public class AdapterPdfUser extends RecyclerView.Adapter<AdapterPdfUser.HolderPd
 
         }
     }
+
+    //Upload to table Library in database
     private void uploadLibraryToDb(ModelPdf product, Long timestamp) {
         String uid = firebaseAuth.getUid();
 
-        //set up data
+        //prepare data
         HashMap<String,Object> hashMap = new HashMap<>();
         hashMap.put("uid", ""+uid);
         hashMap.put("id", ""+timestamp);
         hashMap.put("Books", product);
 
-        //db ref
+        //db ref to upload data
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Library");
         ref.child(""+timestamp)
                 .setValue(hashMap)

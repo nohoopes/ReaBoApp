@@ -27,8 +27,10 @@ import id19110100.hcmute.edu.reaboadmin.Model.Library;
 import id19110100.hcmute.edu.reaboadmin.R;
 
 public class FavoriteFragment extends Fragment {
-
+    //firebase auth
     private FirebaseAuth firebaseAuth;
+
+    //variables
     ArrayList<Favorite> favorites;
     FavoriteBookAdapter adapter;
     ListView lvfavorite;
@@ -49,8 +51,9 @@ public class FavoriteFragment extends Fragment {
 
     }
 
+    //load all favorite books to listview
     private void loadFavorite() {
-
+        //get uid
         String uid = firebaseAuth.getUid();
         //init arraylist
         favorites = new ArrayList<>();

@@ -14,8 +14,6 @@ public class FilterPdfUser extends Filter {
     AdapterPdfUser adapterPdfUser;
 
     //constructor
-
-
     public FilterPdfUser(ArrayList<ModelPdf> filterList, AdapterPdfUser adapterPdfUser) {
         this.filterList = filterList;
         this.adapterPdfUser = adapterPdfUser;
