@@ -30,9 +30,9 @@ public class NavigationBar extends AppCompatActivity implements NavigationView.O
     //navigation drawer
     private DrawerLayout drawerLayout;
     private static final int HOME_FRAGMENT=0;
-    private static final int ORDER_LIST_FRAGMENT=1;
-    private static final int COUPON_LIST_FRAGMENT=2;
-    private static final int CART_FRAGMENT=3;
+    private static final int HISTORY_FRAGMENT=1;
+    private static final int FAVORITE_FRAGMENT=2;
+    private static final int LIBRARY_FRAGMENT=3;
     private static final int MY_PROFILE_FRAGMENT=4;
     private int currentFragment=HOME_FRAGMENT;
     private Toolbar toolbar;
@@ -51,10 +51,8 @@ public class NavigationBar extends AppCompatActivity implements NavigationView.O
 
         //init firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
-
         binding = NavBarBinding.inflate(getLayoutInflater());
         setContentView(R.layout.nav_bar);
-
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawerLayout=findViewById(R.id.drawer_layout);
@@ -68,11 +66,8 @@ public class NavigationBar extends AppCompatActivity implements NavigationView.O
 
         LinearLayout nav_header = (LinearLayout) navigationView.inflateHeaderView(R.layout.nav_header);
         user_name = (TextView) nav_header.findViewById(R.id.nav_header_user_name);
-
         checkUser();
-
         navigationView.setNavigationItemSelectedListener(this);
-
         replaceFragment(new HomeFragment());
         navigationView.getMenu().findItem(R.id.nav_home).setChecked(true);
 
@@ -82,8 +77,10 @@ public class NavigationBar extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id=item.getItemId();
+        // Choosing fragment to show on the home page
         if(id==R.id.nav_home)
         {
+            // Home fragment
             if(currentFragment!=HOME_FRAGMENT)
             {
                 replaceFragment(new HomeFragment());
@@ -92,32 +89,36 @@ public class NavigationBar extends AppCompatActivity implements NavigationView.O
         }
         else if(id==R.id.nav_history)
         {
-            if(currentFragment!=ORDER_LIST_FRAGMENT)
+            // History fragment
+            if(currentFragment!=HISTORY_FRAGMENT)
             {
                 replaceFragment(new HistoryFragment());
-                currentFragment=ORDER_LIST_FRAGMENT;
+                currentFragment=HISTORY_FRAGMENT;
             }
         }
         else if(id==R.id.nav_coupon_list)
         {
-            if(currentFragment!=COUPON_LIST_FRAGMENT)
+            // Favorite fragment
+            if(currentFragment!=FAVORITE_FRAGMENT)
             {
                 replaceFragment(new FavoriteFragment());
-                currentFragment=COUPON_LIST_FRAGMENT;
+                currentFragment=FAVORITE_FRAGMENT;
             }
         }
 
         else if(id==R.id.nav_shopping_cart)
         {
-            if(currentFragment!=CART_FRAGMENT)
+            // Library fragment
+            if(currentFragment!=LIBRARY_FRAGMENT)
             {
                 replaceFragment(new LibraryFragment());
-                currentFragment=CART_FRAGMENT;
+                currentFragment=LIBRARY_FRAGMENT;
             }
         }
 
         else if(id==R.id.nav_my_profile)
         {
+            // Profile fragment
             if(currentFragment!=MY_PROFILE_FRAGMENT)
             {
                 replaceFragment(new MyProfileFragment());
@@ -127,6 +128,7 @@ public class NavigationBar extends AppCompatActivity implements NavigationView.O
 
         else if(id==R.id.nav_logout)
         {
+            // Log out of the current user account
             firebaseAuth.signOut();
             checkUser();
         }
@@ -145,6 +147,7 @@ public class NavigationBar extends AppCompatActivity implements NavigationView.O
     }
 
     private void replaceFragment(Fragment fragment){
+        // replace the fragment to switch between fragments
         FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.content_frame,fragment);
         transaction.commit();

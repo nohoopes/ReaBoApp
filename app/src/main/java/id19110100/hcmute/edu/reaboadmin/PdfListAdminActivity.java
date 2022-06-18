@@ -89,6 +89,7 @@ public class PdfListAdminActivity extends AppCompatActivity {
 
     }
 
+    // load the Book list base on the category
     private void loadPdfList() {
         //init
         pdfArrayList = new ArrayList<>();

@@ -66,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private String email ="", password ="";
+    // Checking the input information
     private void validateData() {
 
         //get data
@@ -83,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
             loginUser();
         }
     }
-
+    // Login to the home page
     private void loginUser() {
         //progress
         progressDialog.setMessage("Logging...");
@@ -109,7 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    // Check the role of the user
     private void checkUser() {
         progressDialog.setMessage("Checking...");
 

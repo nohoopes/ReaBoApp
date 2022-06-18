@@ -42,7 +42,6 @@ public class FindingBookActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         //get data from intent
-        //Intent intent = getIntent();
         Intent intent = getIntent();
         namebook= intent.getStringExtra("name_search");
         binding.searchEt.setText(namebook);
@@ -89,7 +88,7 @@ public class FindingBookActivity extends AppCompatActivity {
         });
     }
 
-
+    // Load all of the books to the page
     private void loadPdfList() {
         //init
         pdfArrayList = new ArrayList<>();

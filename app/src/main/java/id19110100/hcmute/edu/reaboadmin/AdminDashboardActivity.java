@@ -98,7 +98,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         });
 
     }
-
+    // Load all of the categories in the db to the page
     private void loadCategories() {
         //init arraylist
         categoryAdArrayList = new ArrayList<>();
@@ -128,7 +128,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         });
 
     }
-
+    // check for the current user status
     private void checkUser() {
         //get current user
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();

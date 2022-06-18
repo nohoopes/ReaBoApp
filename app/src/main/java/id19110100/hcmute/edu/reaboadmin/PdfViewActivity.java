@@ -59,7 +59,7 @@ public class PdfViewActivity extends AppCompatActivity {
         //load Book view
         loadBookView();
     }
-
+    // Load the book to read
     private void loadBookView() {
         Log.d(TAG, "loadBookView: Loading...");
         //get book
@@ -82,7 +82,7 @@ public class PdfViewActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    // Load the Book Url from the database
     private void loadBookFromUrl(String pdfUrl) {
         Log.d(TAG, "loadBookFromUrl: get Pdf from storage...");
         StorageReference reference = FirebaseStorage.getInstance().getReferenceFromUrl(pdfUrl);

@@ -88,13 +88,14 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(this, "Please confirm password...!", Toast.LENGTH_SHORT).show();
         }
         else if (!password.equals(confirmPassword)){
+            // check for the password and the confirm password
             Toast.makeText(this, "Password doesn't match...!", Toast.LENGTH_SHORT).show();
         }
         else {
             createUserAccount();
         }
     }
-
+    // Create the account for new user
     private void createUserAccount() {
         //progress
         progressDialog.setMessage("Creating account...");
@@ -119,6 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
                 });
     }
 
+    // update the User Information
     private void updateUserInfor() {
         progressDialog.setMessage("Saving info...");
 

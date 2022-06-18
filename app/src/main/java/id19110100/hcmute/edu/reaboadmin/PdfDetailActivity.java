@@ -61,7 +61,7 @@ public class PdfDetailActivity extends AppCompatActivity {
 
 
     }
-
+    // Loading the book's details
     private void loadBookDetails() {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Books");
         ref.child(bookId)

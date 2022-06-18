@@ -62,6 +62,7 @@ public class CategoryAddActivity extends AppCompatActivity {
     }
 
     private String category ="";
+    // checking input data
     private void validateData() {
         //get data
         category = binding.categoryEt.getText().toString().trim();
@@ -73,7 +74,7 @@ public class CategoryAddActivity extends AppCompatActivity {
             addCategoryFirebase();
         }
     }
-
+    // Add the new category to the db
     private void addCategoryFirebase() {
         //show progress
         progressDialog.setMessage("Adding category...");

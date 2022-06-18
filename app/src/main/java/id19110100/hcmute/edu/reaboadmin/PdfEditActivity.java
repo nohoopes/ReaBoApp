@@ -87,6 +87,8 @@ public class PdfEditActivity extends AppCompatActivity {
     }
 
     private String title ="", description="", license ="";
+
+    // Check for the input data whether it's correct or not
     private void validateData() {
 
         Log.d(TAG, "validateData: validate data...");
@@ -113,7 +115,7 @@ public class PdfEditActivity extends AppCompatActivity {
             updatePdf();
         }
     }
-
+    // Upload the book to the database
     private void updatePdf() {
         Log.d(TAG, "updatePdf: Starting updating pdf info to db...");
 
@@ -153,6 +155,7 @@ public class PdfEditActivity extends AppCompatActivity {
                 });
     }
 
+    // Load the information of the books
     private void loadBookInfo() {
         Log.d(TAG, "loadBookInfo: Loading book info...");
 
@@ -198,6 +201,7 @@ public class PdfEditActivity extends AppCompatActivity {
                 });
     }
 
+    // Show the Dialog of the category
     private void categoryDialog(){
         //make string array
         String[] categoriesArray = new String[categoryTitleArrayList.size()];
@@ -225,6 +229,7 @@ public class PdfEditActivity extends AppCompatActivity {
 
     //variables
     private String selectedCategoryId="", selectedCategoryTitle="";
+    // load the category
     private void loadCategory() {
         Log.d(TAG, "loadCategory: Loading category...");
 

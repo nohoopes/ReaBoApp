@@ -106,6 +106,7 @@ public class PdfAddActivity extends AppCompatActivity {
     }
 
     private String title ="", description="", license ="";
+    // Check for the input data
     private void validateData() {
 
         Log.d(TAG, "validateData: validate data...");
@@ -134,7 +135,7 @@ public class PdfAddActivity extends AppCompatActivity {
             uploadPdfToStorage();
         }
     }
-
+    // Save the book to the storage( the book's content)
     private void uploadPdfToStorage() {
         //up load pdf to firebase
         Log.d(TAG, "uploadPdfToStorage: uploading to storage...");
@@ -175,7 +176,7 @@ public class PdfAddActivity extends AppCompatActivity {
                 });
 
     }
-
+    // Upload the information of the book to the db
     private void uploadPdfInfoToDb(String uploadPdfUrl, long timestamp) {
         //upload pdf info to firebase db
         Log.d(TAG, "uploadPdfInfoToDb: Upload pdf info to firebase db...");
@@ -220,7 +221,7 @@ public class PdfAddActivity extends AppCompatActivity {
                 });
 
     }
-
+    // Loading all of the categories
     private void loadPdfCategories() {
         Log.d(TAG, "loadPdfCategories: Loading pdf categories...");
         categoryTitleAdArrayList = new ArrayList<>();
@@ -253,7 +254,7 @@ public class PdfAddActivity extends AppCompatActivity {
 
     //select category id and title
     private String selectedCategoryId, selectedCategoryTitle;
-
+    // Show the dialog for users to picking the category
     private void categoryPickDialog() {
         Log.d(TAG,"categoryPickDialog: showing category pick dialog");
 
@@ -279,7 +280,7 @@ public class PdfAddActivity extends AppCompatActivity {
                 })
                 .show();
     }
-
+    // redirect to the pdfPick
     private void pdfPickIntent() {
         Log.d(TAG,"pdfPickIntent: start pdf pick intent");
 
